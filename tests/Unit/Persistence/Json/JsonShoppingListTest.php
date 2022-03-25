@@ -6,6 +6,7 @@ namespace Tests\Unit\Persistence\Json;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\Slug;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingList;
 use PHPUnit\Framework\TestCase;
 
@@ -40,7 +41,7 @@ JSON;
         );
 
         $list = new JsonShoppingList(new ShoppingList(
-            'my-list',
+            new Slug('my-list'),
             'My List',
             $items,
         ));

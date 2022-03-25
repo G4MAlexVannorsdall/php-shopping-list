@@ -6,6 +6,7 @@ namespace Tests\Unit\Persistence\Json;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\Slug;
 use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingItemFactory;
 use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingListFactory;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -46,7 +47,7 @@ class ShoppingListFactoryTest extends TestCase
         ];
 
         $expected = new ShoppingList(
-            'my-list',
+            new Slug('my-list'),
             'My List',
             new ShoppingItemStack(new ShoppingItem(
                 $values['items'][0]['id'],

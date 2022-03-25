@@ -8,6 +8,14 @@ use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 interface ShoppingListRepositoryInterface
 {
     /**
+     * Does a shopping list identified by the supplied slug exist?
+     *
+     * @param string $slug
+     * @return bool
+     */
+    public function exists(string $slug): bool;
+
+    /**
      * Retrieve a shopping list by its slug.
      *
      * @param string $slug

@@ -9,9 +9,9 @@ use InvalidArgumentException;
 class ShoppingList
 {
     /**
-     * @var string
+     * @var Slug
      */
-    private string $slug;
+    private Slug $slug;
 
     /**
      * @var string
@@ -24,13 +24,13 @@ class ShoppingList
     private ShoppingItemStack $items;
 
     /**
-     * @param string $slug
+     * @param Slug $slug
      * @param string $name
      * @param ShoppingItemStack|null $items
      */
-    public function __construct(string $slug, string $name, ShoppingItemStack $items = null)
+    public function __construct(Slug $slug, string $name, ShoppingItemStack $items = null)
     {
-        $this->slug = $this->assertSlug($slug);
+        $this->slug = $slug;
         $this->setName($name);
         $this->items = $items ?? new ShoppingItemStack();
     }
@@ -38,9 +38,9 @@ class ShoppingList
     /**
      * Get the shopping list unique slug.
      *
-     * @return string
+     * @return Slug
      */
-    public function getSlug(): string
+    public function getSlug(): Slug
     {
         return $this->slug;
     }
@@ -77,20 +77,5 @@ class ShoppingList
     public function getItems(): ShoppingItemStack
     {
         return $this->items;
-    }
-
-    /**
-     * @param string $slug
-     * @return string
-     */
-    private function assertSlug(string $slug): string
-    {
-        $check = preg_match('/^[a-z][a-z\-]{2,}[a-z]$/', $slug);
-
-        if (false === $check || 0 === $check) {
-            throw new InvalidArgumentException('Invalid shopping list slug.');
-        }
-
-        return $slug;
     }
 }

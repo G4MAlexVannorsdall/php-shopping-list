@@ -31,6 +31,16 @@ class JsonShoppingListRepository implements ShoppingListRepositoryInterface
     /**
      * @inheritDoc
      */
+    public function exists(string $slug): bool
+    {
+        return $this->files->exists(
+            $this->storeAs($slug)
+        );
+    }
+
+    /**
+     * @inheritDoc
+     */
     public function find(string $slug): ?ShoppingList
     {
         $filename = $this->storeAs($slug);

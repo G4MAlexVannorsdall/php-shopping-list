@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Persistence\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\Slug;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
@@ -41,6 +42,18 @@ class JsonShoppingListRepositoryTest extends TestCase
         );
     }
 
+    public function testExists(): void
+    {
+        $this->files
+            ->expects($this->exactly(2))
+            ->method('exists')
+            ->with('my-list.json')
+            ->willReturnOnConsecutiveCalls(false, true);
+
+        $this->assertFalse($this->repository->exists('my-list'));
+        $this->assertTrue($this->repository->exists('my-list'));
+    }
+
     public function testListDoesNotExist(): void
     {
         $this->files
@@ -60,7 +73,7 @@ class JsonShoppingListRepositoryTest extends TestCase
 
     public function testListDoesExist(): void
     {
-        $expected = new ShoppingList('my-list', 'My List');
+        $expected = new ShoppingList(new Slug('my-list'), 'My List');
 
         $this->files
             ->expects($this->once())
@@ -87,7 +100,7 @@ class JsonShoppingListRepositoryTest extends TestCase
 
     public function testStore(): void
     {
-        $list = new ShoppingList('my-list', 'My List');
+        $list = new ShoppingList(new Slug('my-list'), 'My List');
 
         $this->files
             ->expects($this->once())

@@ -6,15 +6,19 @@ namespace Tests\Unit\Domain;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\Slug;
 use PHPUnit\Framework\TestCase;
 
 class ShoppingListTest extends TestCase
 {
     public function testConstructWithoutList(): ShoppingList
     {
-        $list = new ShoppingList('my-list', 'My List');
+        $list = new ShoppingList(
+            $slug = new Slug('my-list'),
+            'My List',
+        );
 
-        $this->assertSame('my-list', $list->getSlug());
+        $this->assertSame($slug, $list->getSlug());
         $this->assertSame('My List', $list->getName());
         $this->assertEmpty($list->getItems()->all());
 
@@ -24,7 +28,7 @@ class ShoppingListTest extends TestCase
     public function testConstructWithList(): void
     {
         $list = new ShoppingList(
-            'my-list',
+            new Slug('my-list'),
             'My List',
             $expected = new ShoppingItemStack(new ShoppingItem(1, 'Bananas')),
         );
@@ -40,27 +44,5 @@ class ShoppingListTest extends TestCase
     {
         $this->assertSame($list, $list->setName('My Other List'));
         $this->assertSame('My Other List', $list->getName());
-    }
-
-    /**
-     * @return array
-     */
-    public function invalidSlugProvider(): array
-    {
-        return [
-            ['MY-LIST'],
-        ];
-    }
-
-    /**
-     * @param string $value
-     * @dataProvider invalidSlugProvider
-     */
-    public function testInvalidSlug(string $value): void
-    {
-        $this->expectException(\InvalidArgumentException::class);
-        $this->expectExceptionMessage('slug');
-
-        new ShoppingList($value, 'My List');
     }
 }

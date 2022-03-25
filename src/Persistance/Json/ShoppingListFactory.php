@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Persistance\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\Slug;
 use RuntimeException;
 
 class ShoppingListFactory
@@ -34,7 +35,7 @@ class ShoppingListFactory
         }
 
         return new ShoppingList(
-            $values['slug'],
+            new Slug($values['slug']),
             $values['name'],
             $this->itemFactory->makeMany($values['items']),
         );

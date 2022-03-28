@@ -7,18 +7,18 @@ use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Domain\Slug;
-use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingItemFactory;
-use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingListFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListFactory;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class ShoppingListFactoryTest extends TestCase
+class JsonShoppingListFactoryTest extends TestCase
 {
 
     /**
-     * @var ShoppingListFactory
+     * @var JsonShoppingListFactory
      */
-    private ShoppingListFactory $factory;
+    private JsonShoppingListFactory $factory;
 
     /**
      * @return void
@@ -26,7 +26,7 @@ class ShoppingListFactoryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->factory = new ShoppingListFactory(new ShoppingItemFactory());
+        $this->factory = new JsonShoppingListFactory(new JsonShoppingItemFactory());
     }
 
     /**

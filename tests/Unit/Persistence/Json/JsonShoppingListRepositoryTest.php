@@ -8,7 +8,7 @@ use Lindyhopchris\ShoppingList\Domain\Slug;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
-use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingListFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListFactory;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -21,7 +21,7 @@ class JsonShoppingListRepositoryTest extends TestCase
     private MockObject $files;
 
     /**
-     * @var MockObject|ShoppingListFactory|mixed
+     * @var MockObject|JsonShoppingListFactory|mixed
      */
     private MockObject $factory;
 
@@ -39,7 +39,7 @@ class JsonShoppingListRepositoryTest extends TestCase
 
         $this->repository = new JsonShoppingListRepository(
             $this->files = $this->createMock(JsonFileHandler::class),
-            $this->factory = $this->createMock(ShoppingListFactory::class)
+            $this->factory = $this->createMock(JsonShoppingListFactory::class)
         );
     }
 

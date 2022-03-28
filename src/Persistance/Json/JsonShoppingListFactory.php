@@ -7,17 +7,17 @@ use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Domain\Slug;
 use RuntimeException;
 
-class ShoppingListFactory
+class JsonShoppingListFactory
 {
     /**
-     * @var ShoppingItemFactory
+     * @var JsonShoppingItemFactory
      */
-    private ShoppingItemFactory $itemFactory;
+    private JsonShoppingItemFactory $itemFactory;
 
     /**
-     * @param ShoppingItemFactory $itemFactory
+     * @param JsonShoppingItemFactory $itemFactory
      */
-    public function __construct(ShoppingItemFactory $itemFactory)
+    public function __construct(JsonShoppingItemFactory $itemFactory)
     {
         $this->itemFactory = $itemFactory;
     }

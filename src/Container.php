@@ -15,8 +15,8 @@ use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validatio
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\Rules as CreateShoppingListRules;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
-use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingItemFactory as JsonShoppingItemFactory;
-use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingListFactory as JsonShoppingListFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListFactory;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class Container

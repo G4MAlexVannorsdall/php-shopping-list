@@ -5,15 +5,15 @@ namespace Tests\Unit\Persistence\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
-use Lindyhopchris\ShoppingList\Persistance\Json\ShoppingItemFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
 use PHPUnit\Framework\TestCase;
 
-class ShoppingItemFactoryTest extends TestCase
+class JsonShoppingItemFactoryTest extends TestCase
 {
     /**
-     * @var ShoppingItemFactory
+     * @var JsonShoppingItemFactory
      */
-    private ShoppingItemFactory $factory;
+    private JsonShoppingItemFactory $factory;
 
     /**
      * @return void
@@ -21,7 +21,7 @@ class ShoppingItemFactoryTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->factory = new ShoppingItemFactory();
+        $this->factory = new JsonShoppingItemFactory();
     }
 
     public function testMake(): void

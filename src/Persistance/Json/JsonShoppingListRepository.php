@@ -15,15 +15,15 @@ class JsonShoppingListRepository implements ShoppingListRepositoryInterface
     private JsonFileHandler $files;
 
     /**
-     * @var ShoppingListFactory
+     * @var JsonShoppingListFactory
      */
-    private ShoppingListFactory $factory;
+    private JsonShoppingListFactory $factory;
 
     /**
      * @param JsonFileHandler $files
-     * @param ShoppingListFactory $factory
+     * @param JsonShoppingListFactory $factory
      */
-    public function __construct(JsonFileHandler $files, ShoppingListFactory $factory)
+    public function __construct(JsonFileHandler $files, JsonShoppingListFactory $factory)
     {
         $this->files = $files;
         $this->factory = $factory;

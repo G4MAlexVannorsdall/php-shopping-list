@@ -7,7 +7,7 @@ use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use RuntimeException;
 
-class ShoppingItemFactory
+class JsonShoppingItemFactory
 {
     /**
      * Make a shopping item entity from an array of values.

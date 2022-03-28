@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Persistance\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class JsonShoppingListRepository implements ShoppingListRepositoryInterface
@@ -52,6 +53,18 @@ class JsonShoppingListRepository implements ShoppingListRepositoryInterface
         }
 
         return null;
+    }
+
+    /**
+     * @inheritDoc
+     */
+    public function findOrFail(string $slug): ShoppingList
+    {
+        if ($list = $this->find($slug)) {
+            return $list;
+        }
+
+        throw new ShoppingListNotFoundException("Shopping list '{$slug}' does not exist.");
     }
 
     /**

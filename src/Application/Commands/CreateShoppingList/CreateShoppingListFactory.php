@@ -6,7 +6,7 @@ namespace Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList;
 use Lindyhopchris\ShoppingList\Domain\Slug;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 
-class ShoppingListFactory
+class CreateShoppingListFactory
 {
     /**
      * Create a new shopping list.

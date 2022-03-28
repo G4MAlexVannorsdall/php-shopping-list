@@ -3,8 +3,8 @@ declare(strict_types=1);
 
 namespace Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation;
 
-use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListException;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListModel;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 
 class CreateShoppingListValidator
@@ -46,13 +46,14 @@ class CreateShoppingListValidator
      *
      * @param CreateShoppingListModel $model
      * @return void
+     * @throws ValidationException
      */
     public function validateOrFail(CreateShoppingListModel $model): void
     {
         $result = $this->validate($model);
 
         if ($result->hasErrors()) {
-            throw CreateShoppingListException::invalid($result);
+            throw new ValidationException($result, 'Invalid shopping list.');
         }
     }
 }

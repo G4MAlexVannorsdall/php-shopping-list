@@ -45,4 +45,20 @@ class ShoppingListTest extends TestCase
         $this->assertSame($list, $list->setName('My Other List'));
         $this->assertSame('My Other List', $list->getName());
     }
+
+    public function testAddItem(): void
+    {
+        $item1 = new ShoppingItem(1, 'Bananas');
+        $item2 = new ShoppingItem(2, 'Apples');
+
+        $list = new ShoppingList(
+            new Slug('my-groceries'),
+            'My Groceries',
+            new ShoppingItemStack($item1),
+        );
+
+        $list->addItem($item2);
+
+        $this->assertSame([$item1, $item2], $list->getItems()->all());
+    }
 }

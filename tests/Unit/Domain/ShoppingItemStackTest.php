@@ -33,7 +33,7 @@ class ShoppingItemStackTest extends TestCase
         $this->assertSame($expected, iterator_to_array($stack));
     }
 
-    public function testPush(): void
+    public function testPush(): ShoppingItemStack
     {
         $expected = [
             new ShoppingItem(1, 'Bananas'),
@@ -42,8 +42,38 @@ class ShoppingItemStackTest extends TestCase
         ];
 
         $stack = new ShoppingItemStack($expected[0], $expected[1]);
+        $actual = $stack->push($expected[2]);
 
-        $this->assertSame($stack, $stack->push($expected[2]));
-        $this->assertSame($expected, $stack->all());
+        $this->assertCount(2, $stack);
+        $this->assertSame([$expected[0], $expected[1]], $stack->all());
+
+        $this->assertCount(3, $actual);
+        $this->assertSame($expected, $actual->all());
+
+        return $actual;
+    }
+
+    /**
+     * @param ShoppingItemStack $items
+     * @return void
+     * @depends testPush
+     */
+    public function testItCannotPushDuplicateId(ShoppingItemStack $items): void
+    {
+        $this->expectException(\LogicException::class);
+        $this->expectExceptionMessage('Cannot add item with duplicate id.');
+
+        $items->push(new ShoppingItem(2, 'Blah'));
+    }
+
+    public function testMaxId(): void
+    {
+        $items = new ShoppingItemStack(
+            new ShoppingItem(1, 'Bananas'),
+            new ShoppingItem(3, 'Pears'),
+            new ShoppingItem(2, 'Apples'),
+        );
+
+        $this->assertSame(3, $items->maxId());
     }
 }

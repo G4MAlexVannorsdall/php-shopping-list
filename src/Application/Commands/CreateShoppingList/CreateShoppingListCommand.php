@@ -14,9 +14,9 @@ class CreateShoppingListCommand implements CreateShoppingListCommandInterface
     private CreateShoppingListValidator $validator;
 
     /**
-     * @var ShoppingListFactory
+     * @var CreateShoppingListFactory
      */
-    private ShoppingListFactory $factory;
+    private CreateShoppingListFactory $factory;
 
     /**
      * @var ShoppingListRepositoryInterface
@@ -25,12 +25,12 @@ class CreateShoppingListCommand implements CreateShoppingListCommandInterface
 
     /**
      * @param CreateShoppingListValidator $validator
-     * @param ShoppingListFactory $factory
+     * @param CreateShoppingListFactory $factory
      * @param ShoppingListRepositoryInterface $repository
      */
     public function __construct(
-        CreateShoppingListValidator $validator,
-        ShoppingListFactory $factory,
+        CreateShoppingListValidator     $validator,
+        CreateShoppingListFactory       $factory,
         ShoppingListRepositoryInterface $repository
     ) {
         $this->validator = $validator;

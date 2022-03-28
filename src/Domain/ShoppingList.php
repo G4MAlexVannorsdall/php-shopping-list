@@ -78,4 +78,15 @@ class ShoppingList
     {
         return $this->items;
     }
+
+    /**
+     * Add a new shopping item.
+     *
+     * @param ShoppingItem $item
+     * @return void
+     */
+    public function addItem(ShoppingItem $item): void
+    {
+        $this->items = $this->items->push($item);
+    }
 }

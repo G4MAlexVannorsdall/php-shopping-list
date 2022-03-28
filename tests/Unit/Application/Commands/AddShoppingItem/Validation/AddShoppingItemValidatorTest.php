@@ -1,37 +1,37 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Unit\Application\Commands\CreateShoppingList\Validation;
+namespace Tests\Unit\Application\Commands\AddShoppingItem\Validation;
 
-use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListModel;
-use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListRuleInterface;
-use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListValidator;
+use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\AddShoppingItemModel;
+use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\Validation\AddShoppingItemRuleInterface;
+use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\Validation\AddShoppingItemValidator;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
 
-class CreateShoppingListValidatorTest extends TestCase
+class AddShoppingItemValidatorTest extends TestCase
 {
     /**
-     * @var CreateShoppingListModel|MockObject
+     * @var AddShoppingItemModel|MockObject
      */
-    private CreateShoppingListModel|MockObject $model;
+    private AddShoppingItemModel|MockObject $model;
 
     /**
-     * @var CreateShoppingListRuleInterface|MockObject
+     * @var AddShoppingItemRuleInterface|MockObject
      */
-    private CreateShoppingListRuleInterface|MockObject $rule1;
+    private AddShoppingItemRuleInterface|MockObject $rule1;
 
     /**
-     * @var CreateShoppingListRuleInterface|MockObject
+     * @var AddShoppingItemRuleInterface|MockObject
      */
-    private CreateShoppingListRuleInterface|MockObject $rule2;
+    private AddShoppingItemRuleInterface|MockObject $rule2;
 
     /**
-     * @var CreateShoppingListValidator
+     * @var AddShoppingItemValidator
      */
-    private CreateShoppingListValidator $validator;
+    private AddShoppingItemValidator $validator;
 
     /**
      * @return void
@@ -40,11 +40,11 @@ class CreateShoppingListValidatorTest extends TestCase
     {
         parent::setUp();
 
-        $this->model = $this->createMock(CreateShoppingListModel::class);
+        $this->model = $this->createMock(AddShoppingItemModel::class);
 
-        $this->validator = new CreateShoppingListValidator(
-            $this->rule1 = $this->createMock(CreateShoppingListRuleInterface::class),
-            $this->rule2 = $this->createMock(CreateShoppingListRuleInterface::class),
+        $this->validator = new AddShoppingItemValidator(
+            $this->rule1 = $this->createMock(AddShoppingItemRuleInterface::class),
+            $this->rule2 = $this->createMock(AddShoppingItemRuleInterface::class),
         );
     }
 
@@ -142,7 +142,7 @@ class CreateShoppingListValidatorTest extends TestCase
             $this->validator->validateOrFail($this->model);
             $this->fail('No exception thrown.');
         } catch (ValidationException $ex) {
-            $this->assertSame('Invalid shopping list.', $ex->getMessage());
+            $this->assertSame('Invalid shopping item.', $ex->getMessage());
             $this->assertSame($expected, $ex->getMessages());
         }
     }

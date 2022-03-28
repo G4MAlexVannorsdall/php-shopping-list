@@ -5,6 +5,7 @@ namespace Lindyhopchris\ShoppingList\Domain;
 
 use Countable;
 use IteratorAggregate;
+use LogicException;
 use Traversable;
 
 class ShoppingItemStack implements IteratorAggregate, Countable
@@ -63,15 +64,55 @@ class ShoppingItemStack implements IteratorAggregate, Countable
     }
 
     /**
-     * Add a shopping item to the end of the list.
+     * Return a new shopping item stack with the provided item appended.
      *
      * @param ShoppingItem $item
-     * @return $this
+     * @return ShoppingItemStack
      */
     public function push(ShoppingItem $item): self
     {
-        $this->items[] = $item;
+        if ($this->hasId($item->getId())) {
+            throw new LogicException('Cannot add item with duplicate id.');
+        }
 
-        return $this;
+        $copy = clone $this;
+        $copy->items[] = $item;
+
+        return $copy;
+    }
+
+    /**
+     * Does an item with the provided id exist in the stack?
+     *
+     * @param int $id
+     * @return bool
+     */
+    public function hasId(int $id): bool
+    {
+        foreach ($this->items as $item) {
+            if ($id === $item->getId()) {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
+    /**
+     * Get the highest id in the stack.
+     *
+     * @return int|null
+     */
+    public function maxId(): ?int
+    {
+        $max = null;
+
+        foreach ($this->items as $item) {
+            if ($max < $item->getId()) {
+                $max = $item->getId();
+            }
+        }
+
+        return $max;
     }
 }

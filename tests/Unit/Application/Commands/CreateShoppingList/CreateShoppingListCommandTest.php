@@ -4,10 +4,11 @@ declare(strict_types=1);
 namespace Tests\Unit\Application\Commands\CreateShoppingList;
 
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListCommand;
-use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListException;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListModel;
-use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\ShoppingListFactory;
+use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListValidator;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -21,9 +22,9 @@ class CreateShoppingListCommandTest extends TestCase
     private CreateShoppingListValidator|MockObject $validator;
 
     /**
-     * @var ShoppingListFactory|MockObject
+     * @var CreateShoppingListFactory|MockObject
      */
-    private ShoppingListFactory|MockObject $factory;
+    private CreateShoppingListFactory|MockObject $factory;
 
     /**
      * @var ShoppingListRepositoryInterface|MockObject
@@ -44,7 +45,7 @@ class CreateShoppingListCommandTest extends TestCase
 
         $this->command = new CreateShoppingListCommand(
             $this->validator = $this->createMock(CreateShoppingListValidator::class),
-            $this->factory = $this->createMock(ShoppingListFactory::class),
+            $this->factory = $this->createMock(CreateShoppingListFactory::class),
             $this->repository = $this->createMock(ShoppingListRepositoryInterface::class),
         );
     }
@@ -82,10 +83,12 @@ class CreateShoppingListCommandTest extends TestCase
             'My Groceries',
         );
 
+        $expected = new ValidationException(new ValidationMessageStack(), 'Boom!');
+
         $this->validator
             ->expects($this->once())
             ->method('validateOrFail')
-            ->willThrowException(new CreateShoppingListException('Boom!'));
+            ->willThrowException($expected);
 
         $this->factory
             ->expects($this->never())
@@ -95,7 +98,7 @@ class CreateShoppingListCommandTest extends TestCase
             ->expects($this->never())
             ->method($this->anything());
 
-        $this->expectException(CreateShoppingListException::class);
+        $this->expectException(ValidationException::class);
         $this->expectExceptionMessage('Boom!');
 
         $this->command->execute($model);

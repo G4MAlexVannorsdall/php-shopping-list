@@ -36,12 +36,9 @@ class ShoppingItemFactory
      */
     public function makeMany(array $values): ShoppingItemStack
     {
-        $stack = new ShoppingItemStack();
-
-        foreach ($values as $value) {
-            $stack->push($this->make($value));
-        }
-
-        return $stack;
+        return new ShoppingItemStack(...array_map(
+            fn (array $value): ShoppingItem => $this->make($value),
+            $values,
+        ));
     }
 }

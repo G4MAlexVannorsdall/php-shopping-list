@@ -24,6 +24,13 @@ interface ShoppingListRepositoryInterface
     public function find(string $slug): ?ShoppingList;
 
     /**
+     * @param string $slug
+     * @return ShoppingList
+     * @throws ShoppingListNotFoundException
+     */
+    public function findOrFail(string $slug): ShoppingList;
+
+    /**
      * Store (create or update) a shopping list.
      *
      * @param ShoppingList $list

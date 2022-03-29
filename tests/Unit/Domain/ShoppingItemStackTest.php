@@ -66,6 +66,35 @@ class ShoppingItemStackTest extends TestCase
         $items->push(new ShoppingItem(2, 'Blah'));
     }
 
+    /**
+     * @param ShoppingItemStack $items
+     * @return void
+     * @depends testPush
+     */
+    public function testSelect(ShoppingItemStack $items): void
+    {
+        $actual = $items->select(
+            static fn(ShoppingItem $item): bool => 2 === $item->getId()
+        );
+
+        $this->assertNotNull($actual);
+        $this->assertSame(2, $actual->getId());
+    }
+
+    /**
+     * @param ShoppingItemStack $items
+     * @return void
+     * @depends testPush
+     */
+    public function testSelectIsNull(ShoppingItemStack $items): void
+    {
+        $actual = $items->select(
+            static fn(ShoppingItem $item): bool => 999 === $item->getId()
+        );
+
+        $this->assertNull($actual);
+    }
+
     public function testMaxId(): void
     {
         $items = new ShoppingItemStack(

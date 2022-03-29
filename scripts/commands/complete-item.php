@@ -1,6 +1,6 @@
 <?php
 
-use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\AddShoppingItemModel;
+use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemModel;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
 use Lindyhopchris\ShoppingList\Container;
 
@@ -11,13 +11,13 @@ if (2 > count($args)) {
     exit(1);
 }
 
-$command = Container::getInstance()->getAddShoppingItemCommand();
-$model = new AddShoppingItemModel($args[0], $args[1]);
+$command = Container::getInstance()->getTickOffShoppingItemCommand();
+$model = new TickOffShoppingItemModel($args[0], $args[1]);
 
 try {
     $command->execute($model);
 } catch (ValidationException $ex) {
-    echo 'Cannot add shopping item, for the following reason(s):' . PHP_EOL;
+    echo 'Cannot mark shopping item as completed, for the following reason(s):' . PHP_EOL;
     foreach ($ex->getMessages() as $message) {
         echo $message . PHP_EOL;
     }
@@ -25,7 +25,7 @@ try {
 }
 
 echo sprintf(
-    "Shopping item '%s' added to your '%s' list.",
-    $model->getName(),
+    "Shopping item '%s' marked as completed on your '%s' list.",
+    $model->getItem(),
     $model->getList(),
 ) . PHP_EOL;

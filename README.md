@@ -1,6 +1,7 @@
 # Shopping List
 
-This is a simple shopping list application, written in PHP.
+This is a simple shopping list application, written in PHP. It uses Domain Driven Design (DDD) and a CQRS (Command
+Query Responsibility Separation) structure.
 
 ## Usage
 
@@ -20,4 +21,23 @@ To add a shopping item to a list, provide the list slug and the name of the item
 
 ```bash
 php scripts/shopping.php add-item my-groceries "Wholemeal Bread"
+```
+
+### Mark Shopping Item as Ticked-Off
+
+To mark a shopping item as completed (ticked-off), provide the list slug and either:
+
+- The name of the item; or
+- The number of the item on the list.
+
+For example:
+
+```bash
+php scripts/shopping.php complete-item my-groceries "Wholemeal Bread"
+```
+
+Or to tick off item number 2:
+
+```bash
+php scripts/shopping.php complete-item my-groceries 2
 ```

@@ -13,12 +13,16 @@ use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateSho
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListValidator;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\Rules as CreateShoppingListRules;
+use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemCommand;
+use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemCommandInterface;
+use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\Validation\Rules as TickOffShoppingItemRules;
+use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\Validation\TickOffShoppingItemValidator;
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQuery;
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQueryInterface;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
-use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListFactory;
+use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class Container
@@ -97,6 +101,25 @@ class Container
     {
         return new GetShoppingListDetailQuery(
             $this->getShoppingListRepository(),
+        );
+    }
+
+    /**
+     * Get a tick-off shopping item command instance.
+     *
+     * @return TickOffShoppingItemCommandInterface
+     */
+    public function getTickOffShoppingItemCommand(): TickOffShoppingItemCommandInterface
+    {
+        $repository = $this->getShoppingListRepository();
+
+        $validator = new TickOffShoppingItemValidator(
+            new TickOffShoppingItemRules\ShoppingItemExistsAndIsNotTickedOff($repository),
+        );
+
+        return new TickOffShoppingItemCommand(
+            $validator,
+            $repository,
         );
     }
 

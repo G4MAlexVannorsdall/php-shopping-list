@@ -115,4 +115,21 @@ class ShoppingItemStack implements IteratorAggregate, Countable
 
         return $max;
     }
+
+    /**
+     * Select a shopping item from the stack.
+     *
+     * @param callable $callback
+     * @return ShoppingItem|null
+     */
+    public function select(callable $callback): ?ShoppingItem
+    {
+        foreach ($this->items as $item) {
+            if (true === $callback($item)) {
+                return $item;
+            }
+        }
+
+        return null;
+    }
 }

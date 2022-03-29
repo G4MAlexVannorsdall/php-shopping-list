@@ -13,6 +13,8 @@ use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateSho
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListValidator;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\Rules as CreateShoppingListRules;
+use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQuery;
+use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQueryInterface;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
@@ -83,6 +85,18 @@ class Container
             $validator,
             new CreateShoppingListFactory(),
             $repository,
+        );
+    }
+
+    /**
+     * Get a shopping list detail query instance.
+     *
+     * @return GetShoppingListDetailQueryInterface
+     */
+    public function getShoppingListDetailQuery(): GetShoppingListDetailQueryInterface
+    {
+        return new GetShoppingListDetailQuery(
+            $this->getShoppingListRepository(),
         );
     }
 

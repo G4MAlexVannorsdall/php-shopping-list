@@ -47,6 +47,16 @@ class Slug implements JsonSerializable
      */
     public function __toString()
     {
+        return $this->toString();
+    }
+
+    /**
+     * Fluent to-string method.
+     *
+     * @return string
+     */
+    public function toString(): string
+    {
         return $this->value;
     }
 

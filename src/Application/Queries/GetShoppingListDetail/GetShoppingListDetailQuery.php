@@ -29,12 +29,14 @@ class GetShoppingListDetailQuery implements GetShoppingListDetailQueryInterface
         $list = $this->repository->findOrFail($slug);
         $items = [];
 
-        foreach($list->getItems() as $item) {
-            $items[] = new ShoppingItemDetailModel(
-                $item->getId(),
-                $item->getName(),
-                $item->isCompleted(),
-            );
+        foreach ($list->getItems() as $item) {
+            if ($item->isNotCompleted()) {
+                $items[] = new ShoppingItemDetailModel(
+                    $item->getId(),
+                    $item->getName(),
+                    $item->isCompleted(),
+                );
+            }
         }
 
         return new ShoppingListDetailModel(

@@ -63,6 +63,16 @@ class ShoppingItem
     }
 
     /**
+     * Is the item not completed (not checked off?)
+     *
+     * @return bool
+     */
+    public function isNotCompleted(): bool
+    {
+        return $this->completed === false;
+    }
+
+    /**
      * Mark the item as completed (aka checked off).
      *
      * @return void

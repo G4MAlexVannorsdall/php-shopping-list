@@ -27,12 +27,15 @@ class GetShoppingListDetailQuery implements GetShoppingListDetailQueryInterface
     public function execute(string $slug): ShoppingListDetailModel
     {
         $list = $this->repository->findOrFail($slug);
+        $items = [];
 
-        $items = array_map(static fn(ShoppingItem $item): ShoppingItemDetailModel => new ShoppingItemDetailModel(
-            $item->getId(),
-            $item->getName(),
-            $item->isCompleted(),
-        ), $list->getItems()->all());
+        foreach($list->getItems() as $item) {
+            $items[] = new ShoppingItemDetailModel(
+                $item->getId(),
+                $item->getName(),
+                $item->isCompleted(),
+            );
+        }
 
         return new ShoppingListDetailModel(
             $list->getSlug()->toString(),

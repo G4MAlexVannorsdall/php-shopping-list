@@ -6,7 +6,7 @@ namespace Tests\Unit\Domain;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use PHPUnit\Framework\TestCase;
 
 class ShoppingListTest extends TestCase

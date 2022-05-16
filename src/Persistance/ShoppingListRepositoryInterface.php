@@ -24,6 +24,8 @@ interface ShoppingListRepositoryInterface
     public function find(string $slug): ?ShoppingList;
 
     /**
+     * Retrieve a shopping list by its slug, throwing an exception if the list does not exist.
+     *
      * @param string $slug
      * @return ShoppingList
      * @throws ShoppingListNotFoundException

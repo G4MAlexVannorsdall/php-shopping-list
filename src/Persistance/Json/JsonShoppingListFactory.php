@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Persistance\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use RuntimeException;
 
 class JsonShoppingListFactory

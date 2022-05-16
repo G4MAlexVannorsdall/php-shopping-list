@@ -6,7 +6,7 @@ namespace Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Val
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListModel;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListRuleInterface;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 
 class ShoppingListSlugMatchesPattern implements CreateShoppingListRuleInterface
 {

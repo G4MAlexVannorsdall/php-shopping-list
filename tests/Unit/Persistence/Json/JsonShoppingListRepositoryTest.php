@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Persistence\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;

@@ -15,6 +15,14 @@ php scripts/shopping.php create-list my-groceries "My Groceries"
 
 Use the slug when running other commands for this lists.
 
+### View a Shopping List
+
+To view the items on a shopping list, use the `view-list` command with the list's slug:
+
+```bash
+php scripts/shopping.php view-list my-groceries
+```
+
 ### Add a Shopping Item
 
 To add a shopping item to a list, provide the list slug and the name of the item to add:

@@ -3,7 +3,7 @@ declare(strict_types=1);
 
 namespace Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList;
 
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 
 class CreateShoppingListFactory

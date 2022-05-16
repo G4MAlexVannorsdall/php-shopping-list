@@ -1,9 +1,9 @@
 <?php
 declare(strict_types=1);
 
-namespace Tests\Unit\Domain;
+namespace Tests\Unit\Domain\ValueObjects;
 
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use PHPUnit\Framework\TestCase;
 
 class SlugTest extends TestCase

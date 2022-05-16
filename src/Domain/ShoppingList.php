@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Domain;
 
 use InvalidArgumentException;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 
 class ShoppingList
 {

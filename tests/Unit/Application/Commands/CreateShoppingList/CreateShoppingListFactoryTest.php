@@ -4,7 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Application\Commands\CreateShoppingList;
 
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
-use Lindyhopchris\ShoppingList\Domain\Slug;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use PHPUnit\Framework\TestCase;
 
 class CreateShoppingListFactoryTest extends TestCase

@@ -1,7 +1,7 @@
 <?php
 declare(strict_types=1);
 
-namespace Lindyhopchris\ShoppingList\Domain;
+namespace Lindyhopchris\ShoppingList\Domain\ValueObjects;
 
 use JsonSerializable;
 use UnexpectedValueException;

@@ -4,7 +4,6 @@
 
 use Lindyhopchris\ShoppingList\Container;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
-use Lindyhopchris\ShoppingList\Domain\ValueObjects\ShoppingItemFilterEnum;
 
 if (1 > count($args)) {
     echo 'Expecting one argument: shopping list slug.' . PHP_EOL;

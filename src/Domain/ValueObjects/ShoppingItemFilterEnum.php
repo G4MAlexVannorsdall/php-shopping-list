@@ -2,19 +2,36 @@
 
 namespace Lindyhopchris\ShoppingList\Domain\ValueObjects;
 
+use http\Exception\InvalidArgumentException;
+
 class ShoppingItemFilterEnum
 {
+
+    const ONE = 'all';
+    const TWO = 'only completed';
+    const THREE = 'only not completed';
+
+    function showConstant()
+    {
+        echo self::ONE;
+        echo self::TWO;
+        echo self::THREE;
+    }
     /**
      * @var string
      */
-    private string $all;
+    private string $value;
 
     /**
-     * @param string $all
+     * @param string $value
      */
-    public function __construct(string $all)
+    public function __construct(string $value)
     {
-        $this->all = $all;
+        if ($value !== self::ONE || self::TWO || self::THREE) {
+            throw new InvalidArgumentException('This was not a valid search.');
+        }
+
+        $this->value = $value;
     }
 
     /**
@@ -22,9 +39,9 @@ class ShoppingItemFilterEnum
      *
      * @return bool
      */
-    public function all(): bool
+    public function value(): bool
     {
-        return $this->all;
+        return $this->value;
     }
 
     /**
@@ -34,7 +51,7 @@ class ShoppingItemFilterEnum
      */
     public function onlyCompleted(): bool
     {
-        return $this->onlyCompleted();
+        return self::TWO;
     }
 
     /**
@@ -44,6 +61,6 @@ class ShoppingItemFilterEnum
      */
     public function onlyNotCompleted(): bool
     {
-        return $this->onlyNotCompleted();
+        return self::THREE;
     }
 }

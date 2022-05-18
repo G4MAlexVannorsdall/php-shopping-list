@@ -10,9 +10,9 @@ interface GetShoppingListDetailQueryInterface
     /**
      * Get the shopping list detail for the provided slug.
      *
-     * @param string $slug
+     * @param GetShoppingListDetailRequest $slug
      * @return ShoppingListDetailModel
      * @throws ShoppingListNotFoundException
      */
-    public function execute(string $slug): ShoppingListDetailModel;
+    public function execute(GetShoppingListDetailRequest $slug): ShoppingListDetailModel;
 }

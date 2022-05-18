@@ -30,7 +30,7 @@ class ShoppingListDetailModel implements IteratorAggregate, Countable
      *
      * @param string $slug
      * @param string $name
-     * @param ShoppingItemDetailModel[] $items
+     * @param array $items
      */
     public function __construct(string $slug, string $name, array $items)
     {

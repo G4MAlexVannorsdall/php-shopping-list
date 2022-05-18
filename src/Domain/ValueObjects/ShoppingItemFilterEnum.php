@@ -1,22 +1,15 @@
 <?php
+declare(strict_types = 1);
 
 namespace Lindyhopchris\ShoppingList\Domain\ValueObjects;
-
-use http\Exception\InvalidArgumentException;
 
 class ShoppingItemFilterEnum
 {
 
-    const ONE = 'all';
-    const TWO = 'only completed';
-    const THREE = 'only not completed';
+    public const ALL = 'all';
+    public const ONLY_COMPLETED = 'only completed';
+    public const ONLY_NOT_COMPLETED = 'only not completed';
 
-    function showConstant()
-    {
-        echo self::ONE;
-        echo self::TWO;
-        echo self::THREE;
-    }
     /**
      * @var string
      */
@@ -27,21 +20,31 @@ class ShoppingItemFilterEnum
      */
     public function __construct(string $value)
     {
-        if ($value !== self::ONE || self::TWO || self::THREE) {
-            throw new InvalidArgumentException('This was not a valid search.');
+        if ($value !== self::ALL && $value !== self::ONLY_COMPLETED && $value !== self::ONLY_NOT_COMPLETED) {
+            throw new \InvalidArgumentException('This was not a valid search.');
         }
 
         $this->value = $value;
     }
 
     /**
-     * Get all the items on the shopping list.
+     * Returns the value.
+     *
+     * @return string
+     */
+    public function getValue(): string
+    {
+        return $this->value;
+    }
+
+    /**
+     * Get all items of the shopping list.
      *
      * @return bool
      */
-    public function value(): bool
+    public function all(): bool
     {
-        return $this->value;
+        return self::ALL === $this->value;
     }
 
     /**
@@ -51,7 +54,7 @@ class ShoppingItemFilterEnum
      */
     public function onlyCompleted(): bool
     {
-        return self::TWO;
+        return self::ONLY_COMPLETED === $this->value;
     }
 
     /**
@@ -61,6 +64,6 @@ class ShoppingItemFilterEnum
      */
     public function onlyNotCompleted(): bool
     {
-        return self::THREE;
+        return self::ONLY_NOT_COMPLETED === $this->value;
     }
 }

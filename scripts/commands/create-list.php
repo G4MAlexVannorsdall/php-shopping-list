@@ -26,4 +26,3 @@ try {
 
 echo "Shopping list '{$model->getName()}' created!" . PHP_EOL;
 echo "Use '{$model->getSlug()}' when executing commands for this list." . PHP_EOL;
-

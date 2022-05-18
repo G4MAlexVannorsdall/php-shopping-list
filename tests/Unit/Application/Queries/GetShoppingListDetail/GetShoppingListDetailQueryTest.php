@@ -52,6 +52,7 @@ class GetShoppingListDetailQueryTest extends TestCase
             ->willReturn($list);
 
         $expected = new ShoppingListDetailModel('my-groceries', 'My Groceries', [
+            new ShoppingItemDetailModel(1, 'Apples', true),
             new ShoppingItemDetailModel(2, 'Bananas', false),
         ]);
 

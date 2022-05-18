@@ -30,30 +30,3 @@ echo sprintf(
     $model->getList(),
 ) . PHP_EOL;
 
-/**
- * Lines 3-5 are import statements so the logic in those files can be used in this file.
- *
- * Line 3 imports the model for ticking an item off.
- *
- * Line 4 imports the validation file to validate the information given.
- *
- * Line 5 imports the container that contains the objects and the means to retrieve them.
- *
- * Lines 9-12 is an if statement that says if 2 is greater than the number of arguments an error message will be
- * show on the terminal.
- *
- * Line 14 the variable command is assigned to the static container class that is calling on the getInstance function that
- * is calling on the getTickOffShoppingItemCommand function.
- *
- * Line 15 the variable model is assigned to a new object of type TickOffShoppingItemModel that has two arguments.
- *
- * Lines 17-25 is a try and catch block. The command variable is calling on the execute function that is passing in the model
- * variable.
- * In the catch section the ValidationException class is called with the variable ex to validate the given information.
- * It then echoes a statement that tells the user that their item can't be marked off for a certain reason.
- * A foreach loop is next that has the ex variable calling on the getMessages function as message variable, then echoes
- * the message before exiting the loop.
- *
- * Lines 27-31 uses the sprintf function to echo a statement to the terminal if the script was successful, then the model variable
- * calls on the getName function, and on line 30 the model variable calls on the getList function.
- */

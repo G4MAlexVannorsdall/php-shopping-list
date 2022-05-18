@@ -38,4 +38,3 @@ foreach ($list->getItems() as $item) {
         $item->getName(),
     ) . PHP_EOL;
 }
-

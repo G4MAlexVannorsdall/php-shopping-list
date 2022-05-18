@@ -29,4 +29,3 @@ echo sprintf(
     $model->getName(),
     $model->getList(),
 ) . PHP_EOL;
-

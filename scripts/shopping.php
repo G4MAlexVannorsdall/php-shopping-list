@@ -19,5 +19,3 @@ if (!file_exists($filename)) {
 }
 
 include $filename;
-
-

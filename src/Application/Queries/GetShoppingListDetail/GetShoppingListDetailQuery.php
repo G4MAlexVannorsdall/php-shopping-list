@@ -24,9 +24,9 @@ class GetShoppingListDetailQuery implements GetShoppingListDetailQueryInterface
     /**
      * @inheritDoc
      */
-    public function execute(string $slug): ShoppingListDetailModel
+    public function execute(GetShoppingListDetailRequest $request): ShoppingListDetailModel
     {
-        $list = $this->repository->findOrFail($slug);
+        $list = $this->repository->findOrFail($request->getSlug());
         $items = [];
 
         foreach ($list->getItems() as $item) {

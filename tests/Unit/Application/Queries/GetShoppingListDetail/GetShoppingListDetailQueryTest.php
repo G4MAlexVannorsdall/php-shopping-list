@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Tests\Unit\Application\Queries\GetShoppingListDetail;
 
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQuery;
+use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailRequest;
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\ShoppingItemDetailModel;
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\ShoppingListDetailModel;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
@@ -55,7 +56,7 @@ class GetShoppingListDetailQueryTest extends TestCase
             new ShoppingItemDetailModel(2, 'Bananas', false),
         ]);
 
-        $actual = $this->query->execute('my-groceries');
+        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'Bananas'));
 
         $this->assertEquals($expected, $actual);
     }

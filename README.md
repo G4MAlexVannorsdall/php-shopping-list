@@ -49,10 +49,3 @@ Or to tick off item number 2:
 ```bash
 php scripts/shopping.php complete-item my-groceries 2
 ```
-### View only the items that have not been ticked off
-
-To view the items on a list that have not been completed(ticked off), provide the list name.
-
-```bash
-php scripts/shopping.php non-ticked-off supplies
-```

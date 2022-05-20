@@ -15,7 +15,7 @@ $slug = $args[0];
 $query = Container::getInstance()->getShoppingListDetailQuery();
 
 try {
-    $list = $query->execute(new GetShoppingListDetailRequest('supplies', 'all'));
+    $list = $query->execute(new GetShoppingListDetailRequest($slug, 'all'));
 } catch (ShoppingListNotFoundException $ex) {
     echo sprintf("Shopping list '%s' does not exist.", $slug) . PHP_EOL;
     exit(1);

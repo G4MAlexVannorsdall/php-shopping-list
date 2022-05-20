@@ -14,6 +14,4 @@ class GetShoppingListDetailRequestTest extends TestCase
         $this->assertEquals('supplies', $request->getSlug());
         $this->assertEquals('all', $request->getFilterValue());
     }
-
-
 }

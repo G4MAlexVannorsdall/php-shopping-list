@@ -56,7 +56,7 @@ class GetShoppingListDetailQueryTest extends TestCase
             new ShoppingItemDetailModel(2, 'Bananas', false),
         ]);
 
-        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'Bananas'));
+        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'all'));
 
         $this->assertEquals($expected, $actual);
     }

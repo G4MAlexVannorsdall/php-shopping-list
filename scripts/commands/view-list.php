@@ -2,6 +2,7 @@
 
 /** @var array $args */
 
+use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailRequest;
 use Lindyhopchris\ShoppingList\Container;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
 
@@ -14,7 +15,7 @@ $slug = $args[0];
 $query = Container::getInstance()->getShoppingListDetailQuery();
 
 try {
-    $list = $query->execute($slug);
+    $list = $query->execute(new GetShoppingListDetailRequest($slug, 'all'));
 } catch (ShoppingListNotFoundException $ex) {
     echo sprintf("Shopping list '%s' does not exist.", $slug) . PHP_EOL;
     exit(1);

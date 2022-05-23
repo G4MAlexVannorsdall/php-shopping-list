@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\ShoppingItemFilterEnum;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class GetShoppingListDetailQuery implements GetShoppingListDetailQueryInterface
@@ -29,8 +30,14 @@ class GetShoppingListDetailQuery implements GetShoppingListDetailQueryInterface
         $list = $this->repository->findOrFail($request->getSlug());
         $items = [];
 
+        $enum = new ShoppingItemFilterEnum($request->getFilterValue());
+
+        /** @var ShoppingItem $item */
         foreach ($list->getItems() as $item) {
-            if ($item->isNotCompleted()) {
+            if (($enum->onlyNotCompleted() && $item->isNotCompleted()) ||
+                $enum->all() ||
+                ($enum->onlyCompleted() && $item->isCompleted())
+            ) {
                 $items[] = new ShoppingItemDetailModel(
                     $item->getId(),
                     $item->getName(),

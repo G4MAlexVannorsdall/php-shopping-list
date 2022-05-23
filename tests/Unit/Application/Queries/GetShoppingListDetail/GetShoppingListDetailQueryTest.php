@@ -39,7 +39,7 @@ class GetShoppingListDetailQueryTest extends TestCase
         );
     }
 
-    public function test(): void
+    public function testOnlyNotCompleted(): void
     {
         $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
@@ -53,6 +53,51 @@ class GetShoppingListDetailQueryTest extends TestCase
             ->willReturn($list);
 
         $expected = new ShoppingListDetailModel('my-groceries', 'My Groceries', [
+            new ShoppingItemDetailModel(2, 'Bananas', false),
+        ]);
+
+        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'only not completed'));
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testOnlyCompleted(): void
+    {
+        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
+            new ShoppingItem(1, 'Apples', true),
+            new ShoppingItem(2, 'Bananas', false),
+        ));
+
+        $this->repository
+            ->expects($this->once())
+            ->method('findOrFail')
+            ->with('my-groceries')
+            ->willReturn($list);
+
+        $expected = new ShoppingListDetailModel('my-groceries', 'My Groceries', [
+            new ShoppingItemDetailModel(1, 'Apples', true),
+        ]);
+
+        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'only completed'));
+
+        $this->assertEquals($expected, $actual);
+    }
+
+    public function testAll(): void
+    {
+        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
+            new ShoppingItem(1, 'Apples', true),
+            new ShoppingItem(2, 'Bananas', false),
+        ));
+
+        $this->repository
+            ->expects($this->once())
+            ->method('findOrFail')
+            ->with('my-groceries')
+            ->willReturn($list);
+
+        $expected = new ShoppingListDetailModel('my-groceries', 'My Groceries', [
+            new ShoppingItemDetailModel(1, 'Apples', true),
             new ShoppingItemDetailModel(2, 'Bananas', false),
         ]);
 

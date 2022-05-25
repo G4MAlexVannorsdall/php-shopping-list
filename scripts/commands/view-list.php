@@ -4,18 +4,24 @@
 
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailRequest;
 use Lindyhopchris\ShoppingList\Container;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\ShoppingItemFilterEnum;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
 
 if (1 > count($args)) {
     echo 'Expecting one argument: shopping list slug.' . PHP_EOL;
     exit(1);
 }
-
 $slug = $args[0];
 $query = Container::getInstance()->getShoppingListDetailQuery();
 
+if (!isset($args[1])) {
+   $filterValue = ShoppingItemFilterEnum::ONLY_NOT_COMPLETED;
+} else {
+    $filterValue = $args[1];
+}
+
 try {
-    $list = $query->execute(new GetShoppingListDetailRequest($slug, 'all'));
+    $list = $query->execute(new GetShoppingListDetailRequest($slug, $filterValue));
 } catch (ShoppingListNotFoundException $ex) {
     echo sprintf("Shopping list '%s' does not exist.", $slug) . PHP_EOL;
     exit(1);

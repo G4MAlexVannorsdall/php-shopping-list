@@ -7,8 +7,8 @@ class ShoppingItemFilterEnum
 {
 
     public const ALL = 'all';
-    public const ONLY_COMPLETED = 'only completed';
-    public const ONLY_NOT_COMPLETED = 'only not completed';
+    public const ONLY_COMPLETED = 'complete';
+    public const ONLY_NOT_COMPLETED = 'not-complete';
 
     /**
      * @var string

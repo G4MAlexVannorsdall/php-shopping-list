@@ -56,7 +56,7 @@ class GetShoppingListDetailQueryTest extends TestCase
             new ShoppingItemDetailModel(2, 'Bananas', false),
         ]);
 
-        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'only not completed'));
+        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'not-complete'));
 
         $this->assertEquals($expected, $actual);
     }
@@ -78,7 +78,7 @@ class GetShoppingListDetailQueryTest extends TestCase
             new ShoppingItemDetailModel(1, 'Apples', true),
         ]);
 
-        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'only completed'));
+        $actual = $this->query->execute(new GetShoppingListDetailRequest('my-groceries', 'complete'));
 
         $this->assertEquals($expected, $actual);
     }

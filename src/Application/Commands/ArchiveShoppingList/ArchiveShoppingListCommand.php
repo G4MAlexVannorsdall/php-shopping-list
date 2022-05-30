@@ -6,13 +6,16 @@ namespace Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList;
 
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
-class ArchiveShoppingListCommand implements ArchiveShoppingListInterface
+class ArchiveShoppingListCommand implements ArchiveShoppingListCommandInterface
 {
     /**
      * @var ShoppingListRepositoryInterface
      */
     private ShoppingListRepositoryInterface $repository;
 
+    /**
+     * @param ShoppingListRepositoryInterface $repository
+     */
     public function __construct(ShoppingListRepositoryInterface $repository)
     {
         $this->repository = $repository;

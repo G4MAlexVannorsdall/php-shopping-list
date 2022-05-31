@@ -43,8 +43,8 @@ class GetShoppingListDetailQueryTest extends TestCase
     {
         $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
-            new ShoppingItem(2, 'Bananas', false),
-        ));
+            new ShoppingItem(2, 'Bananas', false)
+        ), false);
 
         $this->repository
             ->expects($this->once())
@@ -66,7 +66,7 @@ class GetShoppingListDetailQueryTest extends TestCase
         $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
             new ShoppingItem(2, 'Bananas', false),
-        ));
+        ), false);
 
         $this->repository
             ->expects($this->once())
@@ -88,7 +88,7 @@ class GetShoppingListDetailQueryTest extends TestCase
         $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
             new ShoppingItem(2, 'Bananas', false),
-        ));
+        ), false);
 
         $this->repository
             ->expects($this->once())

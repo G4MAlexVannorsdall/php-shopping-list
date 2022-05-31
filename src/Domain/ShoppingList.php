@@ -25,15 +25,22 @@ class ShoppingList
     private ShoppingItemStack $items;
 
     /**
+     * @var bool
+     */
+    private bool $isArchived;
+
+    /**
      * @param Slug $slug
      * @param string $name
      * @param ShoppingItemStack|null $items
+     * @param bool $isArchived
      */
-    public function __construct(Slug $slug, string $name, ShoppingItemStack $items = null)
+    public function __construct(Slug $slug, string $name, ShoppingItemStack $items = null, bool $isArchived)
     {
         $this->slug = $slug;
         $this->setName($name);
         $this->items = $items ?? new ShoppingItemStack();
+        $this->isArchived = $isArchived;
     }
 
     /**
@@ -78,6 +85,14 @@ class ShoppingList
     public function getItems(): ShoppingItemStack
     {
         return $this->items;
+    }
+
+    /**
+     * @return bool
+     */
+    public function isArchived(): bool
+    {
+        return $this->isArchived;
     }
 
     /**

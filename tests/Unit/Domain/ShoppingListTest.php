@@ -15,12 +15,13 @@ class ShoppingListTest extends TestCase
     {
         $list = new ShoppingList(
             $slug = new Slug('my-list'),
-            'My List',
+            'My List', null,false
         );
 
         $this->assertSame($slug, $list->getSlug());
         $this->assertSame('My List', $list->getName());
         $this->assertEmpty($list->getItems()->all());
+        $this->assertFalse($list->isArchived());
 
         return $list;
     }
@@ -31,6 +32,7 @@ class ShoppingListTest extends TestCase
             new Slug('my-list'),
             'My List',
             $expected = new ShoppingItemStack(new ShoppingItem(1, 'Bananas')),
+            false
         );
 
         $this->assertSame($expected, $list->getItems());
@@ -54,7 +56,7 @@ class ShoppingListTest extends TestCase
         $list = new ShoppingList(
             new Slug('my-groceries'),
             'My Groceries',
-            new ShoppingItemStack($item1),
+            new ShoppingItemStack($item1), false
         );
 
         $list->addItem($item2);

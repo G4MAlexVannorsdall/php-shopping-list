@@ -48,6 +48,8 @@ class CreateShoppingListCommand implements CreateShoppingListCommandInterface
         $entity = $this->factory->make(
             $model->getSlug(),
             $model->getName(),
+            null,
+            $model->isArchived(),
         );
 
         $this->repository->store($entity);

@@ -55,6 +55,8 @@ class CreateShoppingListCommandTest extends TestCase
         $model = new CreateShoppingListModel(
             'my-groceries',
             'My Groceries',
+            false,
+
         );
 
         $this->validator
@@ -65,7 +67,7 @@ class CreateShoppingListCommandTest extends TestCase
         $this->factory
             ->expects($this->once())
             ->method('make')
-            ->with('my-groceries', 'My Groceries')
+            ->with('my-groceries', 'My Groceries', null, false)
             ->willReturn($entity = $this->createMock(ShoppingList::class));
 
         $this->repository
@@ -81,6 +83,7 @@ class CreateShoppingListCommandTest extends TestCase
         $model = new CreateShoppingListModel(
             'my-groceries',
             'My Groceries',
+            false
         );
 
         $expected = new ValidationException(new ValidationMessageStack(), 'Boom!');

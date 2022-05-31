@@ -13,13 +13,18 @@ class CreateShoppingListFactory
      *
      * @param string $slug
      * @param string $name
+     * @param $items
+     * @param bool $isArchived
      * @return ShoppingList
      */
-    public function make(string $slug, string $name): ShoppingList
+    public function make(string $slug, string $name, $items, bool $isArchived): ShoppingList
     {
         return new ShoppingList(
             new Slug($slug),
             $name,
+            $items,
+            $isArchived,
+
         );
     }
 }

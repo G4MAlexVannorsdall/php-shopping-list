@@ -13,7 +13,7 @@ class CreateShoppingListFactoryTest extends TestCase
     {
         $factory = new CreateShoppingListFactory();
 
-        $actual = $factory->make('my-groceries', 'My Groceries');
+        $actual = $factory->make('my-groceries', 'My Groceries', 0, false);
 
         $this->assertEquals(new Slug('my-groceries'), $actual->getSlug());
         $this->assertSame('My Groceries', $actual->getName());

@@ -15,14 +15,17 @@ class CreateShoppingListModel
      */
     private string $name;
 
+    private bool $isArchived;
+
     /**
      * @param string $slug
      * @param string $name
      */
-    public function __construct(string $slug, string $name)
+    public function __construct(string $slug, string $name, bool $isArchived)
     {
         $this->slug = $slug;
         $this->name = $name;
+        $this->isArchived = $isArchived;
     }
 
     /**
@@ -39,5 +42,10 @@ class CreateShoppingListModel
     public function getName(): string
     {
         return $this->name;
+    }
+
+    public function isArchived(): bool
+    {
+        return $this->isArchived;
     }
 }

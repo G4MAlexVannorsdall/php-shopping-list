@@ -15,12 +15,13 @@ class ShoppingListTest extends TestCase
     {
         $list = new ShoppingList(
             $slug = new Slug('my-list'),
-            'My List',
+            'My List'
         );
 
         $this->assertSame($slug, $list->getSlug());
         $this->assertSame('My List', $list->getName());
         $this->assertEmpty($list->getItems()->all());
+        $this->assertFalse($list->isArchived());
 
         return $list;
     }
@@ -30,6 +31,7 @@ class ShoppingListTest extends TestCase
         $list = new ShoppingList(
             new Slug('my-list'),
             'My List',
+            false,
             $expected = new ShoppingItemStack(new ShoppingItem(1, 'Bananas')),
         );
 
@@ -54,11 +56,23 @@ class ShoppingListTest extends TestCase
         $list = new ShoppingList(
             new Slug('my-groceries'),
             'My Groceries',
-            new ShoppingItemStack($item1),
+            false,
+            new ShoppingItemStack($item1)
         );
 
         $list->addItem($item2);
 
         $this->assertSame([$item1, $item2], $list->getItems()->all());
     }
+
+    /**
+     * @param ShoppingList $list
+     * @depends testConstructWithoutList
+     */
+    public function testSetArchived(ShoppingList $list): void
+    {
+        $list->setArchived(true);
+        $this->assertSame(true, $list->isArchived());
+    }
 }
+

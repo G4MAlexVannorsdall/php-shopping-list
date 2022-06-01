@@ -15,7 +15,7 @@ class ShoppingListTest extends TestCase
     {
         $list = new ShoppingList(
             $slug = new Slug('my-list'),
-            'My List'
+            'My List',
         );
 
         $this->assertSame($slug, $list->getSlug());
@@ -71,8 +71,8 @@ class ShoppingListTest extends TestCase
      */
     public function testSetArchived(ShoppingList $list): void
     {
-        $list->setArchived(true);
-        $this->assertSame(true, $list->isArchived());
+        $this->assertSame($list, $list->setArchived(false));
+        $this->assertSame(false, $list->isArchived());
     }
 }
 

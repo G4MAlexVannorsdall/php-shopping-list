@@ -39,8 +39,8 @@ class ShoppingList
     {
         $this->slug = $slug;
         $this->setName($name);
-        $this->items = $items ?? new ShoppingItemStack();
         $this->isArchived = $isArchived;
+        $this->items = $items ?? new ShoppingItemStack();
     }
 
     /**
@@ -100,12 +100,11 @@ class ShoppingList
     /**
      * Set whether an item is archived.
      *
-     * @param bool $isArchived
-     * @return void
+     * @return self
      */
-    public function setArchived(bool $isArchived): void
+    public function setArchived(): self
     {
-       $this->isArchived = $isArchived;
+       return $this;
     }
 
     /**

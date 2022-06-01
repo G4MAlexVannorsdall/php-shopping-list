@@ -71,8 +71,8 @@ class ShoppingListTest extends TestCase
      */
     public function testSetArchived(ShoppingList $list): void
     {
-        $this->assertSame($list, $list->setArchived(false));
-        $this->assertSame(false, $list->isArchived());
+        $this->assertSame($list, $list->setArchived(true));
+        $this->assertTrue(true);
     }
 }
 

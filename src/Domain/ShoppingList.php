@@ -99,14 +99,10 @@ class ShoppingList
 
     /**
      * Set whether an item is archived.
-     * @param bool $isArchived
      * @return self
      */
-    public function setArchived(bool $isArchived): self
+    public function setArchived(): self
     {
-        if (!empty($isArchived)) {
-            $this->isArchived = $isArchived;
-        }
         return $this;
     }
 

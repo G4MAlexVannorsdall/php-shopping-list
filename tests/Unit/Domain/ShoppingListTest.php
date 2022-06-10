@@ -69,11 +69,21 @@ class ShoppingListTest extends TestCase
      * @param ShoppingList $list
      * @depends testConstructWithoutList
      */
-    public function testSetArchived(ShoppingList $list): void
+    public function testSetArchivedToTrue(ShoppingList $list): void
     {
         $this->assertSame(false, $list->isArchived());
         $this->assertSame($list, $list->setArchived(true));
+        $this->assertTrue($list->isArchived());
+    }
 
+    public function testSetArchivedToFalse(): void
+    {
+        // Given: Given a list that is archived.
+         $list = new ShoppingList(new Slug( 'my-supplies'),'My Supplies', true );
+        // When: Set archived to false.
+        $list->setArchived(false);
+        // Then: The list is not archived.
+        $this->assertFalse($list->isArchived());
     }
 }
 

@@ -25,14 +25,21 @@ class ShoppingList
     private ShoppingItemStack $items;
 
     /**
+     * @var bool
+     */
+    private bool $isArchived;
+
+    /**
      * @param Slug $slug
      * @param string $name
      * @param ShoppingItemStack|null $items
+     * @param bool|false $isArchived
      */
-    public function __construct(Slug $slug, string $name, ShoppingItemStack $items = null)
+    public function __construct(Slug $slug, string $name, bool $isArchived = false, ShoppingItemStack $items = null)
     {
         $this->slug = $slug;
         $this->setName($name);
+        $this->isArchived = $isArchived;
         $this->items = $items ?? new ShoppingItemStack();
     }
 
@@ -81,6 +88,27 @@ class ShoppingList
     }
 
     /**
+     * Get whether an item has been archived.
+     *
+     * @return bool
+     */
+    public function isArchived(): bool
+    {
+        return $this->isArchived;
+    }
+
+    /**
+     * Set whether an item is archived.
+     * @param $isArchived bool
+     * @return self
+     */
+    public function setArchived(bool $isArchived): self
+    {
+        $this->isArchived = $isArchived;
+        return $this;
+    }
+
+    /**
      * Add a new shopping item.
      *
      * @param ShoppingItem $item
@@ -91,3 +119,4 @@ class ShoppingList
         $this->items = $this->items->push($item);
     }
 }
+

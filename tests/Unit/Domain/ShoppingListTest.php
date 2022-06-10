@@ -21,6 +21,7 @@ class ShoppingListTest extends TestCase
         $this->assertSame($slug, $list->getSlug());
         $this->assertSame('My List', $list->getName());
         $this->assertEmpty($list->getItems()->all());
+        $this->assertFalse($list->isArchived());
 
         return $list;
     }
@@ -30,6 +31,7 @@ class ShoppingListTest extends TestCase
         $list = new ShoppingList(
             new Slug('my-list'),
             'My List',
+            false,
             $expected = new ShoppingItemStack(new ShoppingItem(1, 'Bananas')),
         );
 
@@ -54,11 +56,34 @@ class ShoppingListTest extends TestCase
         $list = new ShoppingList(
             new Slug('my-groceries'),
             'My Groceries',
-            new ShoppingItemStack($item1),
+            false,
+            new ShoppingItemStack($item1)
         );
 
         $list->addItem($item2);
 
         $this->assertSame([$item1, $item2], $list->getItems()->all());
     }
+
+    /**
+     * @param ShoppingList $list
+     * @depends testConstructWithoutList
+     */
+    public function testSetArchivedToTrue(ShoppingList $list): void
+    {
+        $this->assertSame(false, $list->isArchived());
+        $this->assertSame($list, $list->setArchived(true));
+        $this->assertTrue($list->isArchived());
+    }
+
+    public function testSetArchivedToFalse(): void
+    {
+        // Given: Given a list that is archived.
+         $list = new ShoppingList(new Slug( 'my-supplies'),'My Supplies', true );
+        // When: Set archived to false.
+        $list->setArchived(false);
+        // Then: The list is not archived.
+        $this->assertFalse($list->isArchived());
+    }
 }
+

@@ -30,7 +30,7 @@ class ArchiveShoppingListCommand implements ArchiveShoppingListCommandInterface
             $model->getList(),
         );
 
-        $this->$list->isArchived();
+        $list->setArchived(true);
 
         $this->repository->store($list);
     }

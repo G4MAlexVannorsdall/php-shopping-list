@@ -49,6 +49,7 @@ class JsonShoppingListFactoryTest extends TestCase
         $expected = new ShoppingList(
             new Slug('my-list'),
             'My List',
+            true,
             new ShoppingItemStack(new ShoppingItem(
                 $values['items'][0]['id'],
                 $values['items'][0]['name'],

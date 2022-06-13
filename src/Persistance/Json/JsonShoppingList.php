@@ -30,6 +30,7 @@ class JsonShoppingList implements JsonSerializable
         return [
             'slug' => $this->list->getSlug(),
             'name' => $this->list->getName(),
+            'archived' => $this->list->isArchived(),
             'items' => iterator_to_array($this->items()),
         ];
     }

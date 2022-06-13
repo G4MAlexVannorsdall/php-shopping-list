@@ -41,7 +41,7 @@ class GetShoppingListDetailQueryTest extends TestCase
 
     public function testOnlyNotCompleted(): void
     {
-        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
+        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', true, new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
             new ShoppingItem(2, 'Bananas', false),
         ));
@@ -63,7 +63,7 @@ class GetShoppingListDetailQueryTest extends TestCase
 
     public function testOnlyCompleted(): void
     {
-        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
+        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', true, new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
             new ShoppingItem(2, 'Bananas', false),
         ));
@@ -85,7 +85,7 @@ class GetShoppingListDetailQueryTest extends TestCase
 
     public function testAll(): void
     {
-        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', new ShoppingItemStack(
+        $list = new ShoppingList(new Slug('my-groceries'), 'My Groceries', true, new ShoppingItemStack(
             new ShoppingItem(1, 'Apples', true),
             new ShoppingItem(2, 'Bananas', false),
         ));

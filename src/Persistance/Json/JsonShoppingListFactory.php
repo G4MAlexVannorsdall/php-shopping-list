@@ -37,6 +37,7 @@ class JsonShoppingListFactory
         return new ShoppingList(
             new Slug($values['slug']),
             $values['name'],
+            true,
             $this->itemFactory->makeMany($values['items']),
         );
     }

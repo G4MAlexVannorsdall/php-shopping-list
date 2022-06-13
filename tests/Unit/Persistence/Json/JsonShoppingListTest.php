@@ -19,6 +19,7 @@ class JsonShoppingListTest extends TestCase
     "list": {
         "slug": "my-list",
         "name": "My List",
+        "archived": true,
         "items": [
             {
                 "id": 1,
@@ -43,6 +44,7 @@ JSON;
         $list = new JsonShoppingList(new ShoppingList(
             new Slug('my-list'),
             'My List',
+            true,
             $items,
         ));
 

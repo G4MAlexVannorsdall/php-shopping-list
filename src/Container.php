@@ -8,6 +8,8 @@ use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\AddShoppingI
 use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\AddShoppingItemFactory;
 use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\Validation\AddShoppingItemValidator;
 use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\Validation\Rules as AddShoppingItemRules;
+use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListCommand;
+use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
@@ -121,6 +123,18 @@ class Container
             $validator,
             $repository,
         );
+    }
+
+    /**
+     * Get an archived shopping list command instance
+     *
+     * @return ArchiveShoppingListCommandInterface
+     */
+    public function getArchivedShoppingListCommand(): ArchiveShoppingListCommandInterface
+    {
+        $repository = $this->getShoppingListRepository();
+
+        return new ArchiveShoppingListCommand($repository);
     }
 
     /**

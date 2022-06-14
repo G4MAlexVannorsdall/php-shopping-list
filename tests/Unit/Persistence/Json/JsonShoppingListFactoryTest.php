@@ -37,6 +37,7 @@ class JsonShoppingListFactoryTest extends TestCase
         $values = [
             'slug' => 'my-list',
             'name' => 'My List',
+            'archived' => true,
             'items' => [
                 [
                     'id' => 1,
@@ -90,5 +91,46 @@ class JsonShoppingListFactoryTest extends TestCase
         $this->expectExceptionMessage('Invalid shopping list array');
 
         $this->factory->make($values);
+    }
+
+    public function testArchivedTrue(): void
+    {
+        // Given a shopping list that has the archived attribute marked true
+
+        $actual = $this->factory->make([
+                'slug' => 'my-list',
+                'name' => 'My List',
+                'archived' => true,
+                'items' => [
+                    [
+                        'id' => 1,
+                        'name' => 'Bananas',
+                        'completed' => true,
+                    ],
+                ],
+            ]);
+        // When/Then the list is marked archived
+        $this->assertTrue($actual->isArchived());
+
+    }
+
+    public function testArchivedFalse(): void
+    {
+        // Given a shopping list that is not marked archived
+
+        $actual = $this->factory->make([
+            'slug' => 'my-list',
+            'name' => 'My List',
+            'archived' => false,
+            'items' => [
+                [
+                    'id' => 1,
+                    'name' => 'Bananas',
+                    'completed' => true,
+                ],
+            ],
+        ]);
+        // When/Then the list is not marked archived
+        $this->assertFalse($actual->isArchived());
     }
 }

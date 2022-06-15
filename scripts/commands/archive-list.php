@@ -11,7 +11,7 @@ if (1 > count($args)) {
     exit(1);
 }
 
-$command = Container::getInstance()->getArchivedShoppingListCommand();
+$command = Container::getInstance()->getArchiveShoppingListCommand();
 $model = new ArchiveShoppingListModel($args[0]);
 
 try {
@@ -25,6 +25,6 @@ try {
 }
 
 echo sprintf(
-        "Shopping list '%s' has been archived.",
-        $model->getList(),
+    "Shopping list '%s' has been archived.",
+    $model->getList(),
     ) . PHP_EOL;

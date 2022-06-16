@@ -27,4 +27,4 @@ try {
 echo sprintf(
     "Shopping list '%s' has been archived.",
     $model->getList(),
-    ) . PHP_EOL;
+) . PHP_EOL;

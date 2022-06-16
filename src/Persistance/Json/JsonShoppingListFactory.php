@@ -30,14 +30,14 @@ class JsonShoppingListFactory
      */
     public function make(array $values): ShoppingList
     {
-        if (!isset($values['slug'], $values['name'], $values['items'], $values['archived'])) {
+        if (!isset($values['slug'], $values['name'], $values['items'])) {
             throw new RuntimeException('Invalid shopping list array.');
         }
 
         return new ShoppingList(
             new Slug($values['slug']),
             $values['name'],
-            $values['archived'],
+            $values['archived'] ?? false,
             $this->itemFactory->makeMany($values['items']),
         );
     }

@@ -130,7 +130,7 @@ class Container
      *
      * @return ArchiveShoppingListCommandInterface
      */
-    public function getArchivedShoppingListCommand(): ArchiveShoppingListCommandInterface
+    public function getArchiveShoppingListCommand(): ArchiveShoppingListCommandInterface
     {
         $repository = $this->getShoppingListRepository();
 

@@ -133,4 +133,21 @@ class JsonShoppingListFactoryTest extends TestCase
         // When/Then the list is not marked archived
         $this->assertFalse($actual->isArchived());
     }
+
+    public function testNoArchivedProperty(): void
+    {
+        $actual = $this->factory->make([
+            'slug' => 'my-list',
+            'name' => 'My List',
+            'items' => [
+                [
+                    'id' => 1,
+                    'name' => 'Bananas',
+                    'completed' => true,
+                ],
+            ],
+        ]);
+
+        $this->assertFalse($actual->isArchived());
+    }
 }

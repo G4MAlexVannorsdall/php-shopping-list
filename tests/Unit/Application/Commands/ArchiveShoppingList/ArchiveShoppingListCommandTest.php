@@ -4,6 +4,7 @@ namespace Tests\Unit\Application\Commands\ArchiveShoppingList;
 
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListModel;
+use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation\ArchiveShoppingListValidator;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
@@ -29,7 +30,8 @@ class ArchiveShoppingListCommandTest extends TestCase
         parent::setUp();
 
         $this->command = new ArchiveShoppingListCommand(
-            $this->repository = $this->createMock(ShoppingListRepositoryInterface::class)
+            $this->repository = $this->createMock(ShoppingListRepositoryInterface::class),
+            $this->createMock(ArchiveShoppingListValidator::class),
         );
     }
 

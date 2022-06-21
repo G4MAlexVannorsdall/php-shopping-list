@@ -29,7 +29,7 @@ class ShoppingListAlreadyArchivedTest extends TestCase
         parent::setUp();
 
         $this->rule = new ShoppingListAlreadyArchived(
-            $this->repository = $this->createMock(ShoppingListRepositoryInterface::class),
+            $this->repository = $this->createMock(ShoppingListRepositoryInterface::class)
         );
     }
 

@@ -5,6 +5,7 @@ namespace Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Va
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListModel;
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation\ArchiveShoppingListRuleInterface;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
+use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class ShoppingListAlreadyArchived implements ArchiveShoppingListRuleInterface
@@ -34,9 +35,12 @@ class ShoppingListAlreadyArchived implements ArchiveShoppingListRuleInterface
             $model->getList(),
         );
 
-        if ($list === $model->getList()) {
+        if (null === $list) {
+           return $result;
+        }
+        elseif (true === $list->isArchived()) {
             $result->addMessage(sprintf(
-                'Shopping list "%s" is already marked as archived.',
+                'Shopping list "%s" is already archived.',
                 $model->getList(),
             ));
         }

@@ -4,17 +4,32 @@ namespace Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Va
 
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListModel;
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation\ArchiveShoppingListRuleInterface;
+use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 
 class ShoppingListSlugDoesNotExist implements ArchiveShoppingListRuleInterface
 {
-public function validate(ArchiveShoppingListModel $model): ValidationMessageStack
-{
-    $result = new ValidationMessageStack();
+    /**
+     * @var ShoppingListRepositoryInterface
+     */
+    private ShoppingListRepositoryInterface $repository;
 
-    if (empty($model->getList())) {
-        $result->addMessage('That shopping list slug does not exist.');
+    /**
+     * @param ShoppingListRepositoryInterface $repository
+     */
+    public function __construct(ShoppingListRepositoryInterface $repository)
+    {
+        $this->repository = $repository;
     }
-    return $result;
+    public function validate(ArchiveShoppingListModel $model): ValidationMessageStack
+    {
+        $result = new ValidationMessageStack();
+
+        if (!$this->repository->exists($model->getList())) {
+            $result->addMessage(sprintf('Shopping list "%s" does not exist.',
+            $model->getList(),
+            ));
+        }
+        return $result;
     }
 }

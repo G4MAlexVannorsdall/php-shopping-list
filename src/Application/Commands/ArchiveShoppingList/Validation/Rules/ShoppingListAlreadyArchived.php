@@ -35,10 +35,7 @@ class ShoppingListAlreadyArchived implements ArchiveShoppingListRuleInterface
             $model->getList(),
         );
 
-        if (null === $list) {
-           return $result;
-        }
-        elseif (true === $list->isArchived()) {
+        if ($list !== null && true === $list->isArchived()) {
             $result->addMessage(sprintf(
                 'Shopping list "%s" is already archived.',
                 $model->getList(),

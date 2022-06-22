@@ -18,6 +18,11 @@ class ArchiveShoppingListCommandTest extends TestCase
     private ShoppingListRepositoryInterface|MockObject $repository;
 
     /**
+     * @var ArchiveShoppingListValidator|MockObject
+     */
+    private ArchiveShoppingListValidator|MockObject $validator;
+
+    /**
      * @var ArchiveShoppingListCommand
      */
     private ArchiveShoppingListCommand $command;
@@ -31,13 +36,19 @@ class ArchiveShoppingListCommandTest extends TestCase
 
         $this->command = new ArchiveShoppingListCommand(
             $this->repository = $this->createMock(ShoppingListRepositoryInterface::class),
-            $this->createMock(ArchiveShoppingListValidator::class),
+            $this->validator = $this->createMock(ArchiveShoppingListValidator::class),
         );
     }
 
     public function test(): void
     {
+        $model = new ArchiveShoppingListModel('my-groceries');
         $mockList = $this->createMock(ShoppingList::class);
+
+        $this->validator
+            ->expects($this->once())
+            ->method('validateOrFail')
+            ->with($model);
 
         $this->repository
             ->expects($this->once())
@@ -56,7 +67,7 @@ class ArchiveShoppingListCommandTest extends TestCase
             ->method('store')
             ->with($this->identicalTo($mockList));
 
-        $this->command->execute(new ArchiveShoppingListModel('my-groceries'));
+        $this->command->execute($model);
     }
 
 }

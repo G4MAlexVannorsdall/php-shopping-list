@@ -10,6 +10,9 @@ use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\Validation\A
 use Lindyhopchris\ShoppingList\Application\Commands\AddShoppingItem\Validation\Rules as AddShoppingItemRules;
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListCommandInterface;
+use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation\ArchiveShoppingListValidator;
+use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation\Rules\ShoppingListAlreadyArchived;
+use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation\Rules\ShoppingListSlugDoesNotExist;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
@@ -134,7 +137,12 @@ class Container
     {
         $repository = $this->getShoppingListRepository();
 
-        return new ArchiveShoppingListCommand($repository);
+        $validator = new ArchiveShoppingListValidator(
+            new ShoppingListSlugDoesNotExist($repository),
+            new ShoppingListAlreadyArchived($repository),
+        );
+
+        return new ArchiveShoppingListCommand($repository, $validator);
     }
 
     /**

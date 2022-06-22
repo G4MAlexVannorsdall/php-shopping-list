@@ -18,7 +18,7 @@ class ArchiveShoppingListValidator
     /**
      * @param ArchiveShoppingListRuleInterface ...$rules
      */
-    public function __construct(ArchiveShoppingListRuleInterface...$rules)
+    public function __construct(ArchiveShoppingListRuleInterface ...$rules)
     {
         $this->rules = $rules;
     }

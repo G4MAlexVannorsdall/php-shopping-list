@@ -2,8 +2,6 @@
 
 namespace Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\Validation;
 
-
-
 use Lindyhopchris\ShoppingList\Application\Commands\ArchiveShoppingList\ArchiveShoppingListModel;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;

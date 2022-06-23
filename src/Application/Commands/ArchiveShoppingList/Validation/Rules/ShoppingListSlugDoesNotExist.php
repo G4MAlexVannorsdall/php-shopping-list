@@ -21,6 +21,11 @@ class ShoppingListSlugDoesNotExist implements ArchiveShoppingListRuleInterface
     {
         $this->repository = $repository;
     }
+
+    /**
+     * @param ArchiveShoppingListModel $model
+     * @return ValidationMessageStack
+     */
     public function validate(ArchiveShoppingListModel $model): ValidationMessageStack
     {
         $result = new ValidationMessageStack();

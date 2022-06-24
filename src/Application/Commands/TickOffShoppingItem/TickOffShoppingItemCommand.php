@@ -50,7 +50,7 @@ class TickOffShoppingItemCommand implements TickOffShoppingItemCommandInterface
 
         $items = [];
         foreach ($items as $item) {
-            if (true === $item->isCompleted()) {
+            if ($item->isCompleted() === true) {
                 $items[] = $item;
             }
         }

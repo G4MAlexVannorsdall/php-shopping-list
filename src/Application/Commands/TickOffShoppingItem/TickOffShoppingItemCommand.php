@@ -49,15 +49,19 @@ class TickOffShoppingItemCommand implements TickOffShoppingItemCommandInterface
         $item->markAsCompleted();
 
         $items = [];
+        $itemsNotComplete = [];
         foreach ($items as $item) {
             if ($item->isCompleted() === true) {
                 $items[] = $item;
+            } elseif ($item->isNotCompleted() === true) {
+                $itemsNotComplete[] = $item;
             }
         }
-            if ($list->getItems() == 0) {
-                $list->setArchived(true);
-            }
 
-            $this->repository->store($list);
+        if (count($itemsNotComplete) === 0) {
+            $list->setArchived(true);
         }
+
+        $this->repository->store($list);
+    }
 }

@@ -12,6 +12,7 @@ use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemSelector;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -46,26 +47,22 @@ class TickOffShoppingItemCommandTest extends TestCase
         );
     }
 
-    public function test(): void
+    public function testItTicksOffItemAndDoesNotAutoArchiveList(): void
     {
-        $model = new TickOffShoppingItemModel('my-groceries', 'Apples');
+        // Given a shopping list that has only one item that is not complete
+        $item1 = new ShoppingItem(1, 'Bananas', true);
+        $item2 = new ShoppingItem(2, 'Apples', true);
+        $item3 = new ShoppingItem(3, 'Pears', false);
+
+        $model = new TickOffShoppingItemModel('my-groceries', 3);
 
         $list = $this->createMock(ShoppingList::class);
 
+        $list->method('getItems')->willReturn(new ShoppingItemStack($item1, $item2, $item3));
+
         $list
-            ->expects($this->once())
-            ->method('getItems')
-            ->willReturn($items = $this->createMock(ShoppingItemStack::class));
-
-        $items
-            ->expects($this->once())
-            ->method('select')
-            ->with($this->equalTo(new ShoppingItemSelector('Apples', false)))
-            ->willReturn($item = $this->createMock(ShoppingItem::class));
-
-        $item
-            ->expects($this->once())
-            ->method('markAsCompleted');
+            ->expects($this->never())
+            ->method('setArchived');
 
         $this->validator
             ->expects($this->once())
@@ -82,6 +79,45 @@ class TickOffShoppingItemCommandTest extends TestCase
             ->expects($this->once())
             ->method('store')
             ->with($this->identicalTo($list));
+
+        $this->command->execute($model);
+    }
+
+    public function testItTicksOffItemAndDoesAutoArchiveList(): void
+    {
+        // Given a shopping list that has only one item that is not complete
+        $item1 = new ShoppingItem(1, 'Bananas', true);
+        $item2 = new ShoppingItem(2, 'Apples', true);
+        $item3 = new ShoppingItem(3, 'Pears', false);
+
+        $model = new TickOffShoppingItemModel('my-groceries', 3);
+
+        $list = new ShoppingList(
+            new Slug('my-groceries'),
+            'My Groceries',
+            false,
+            new ShoppingItemStack($item1, $item2, $item3),
+        );
+
+        $this->validator
+            ->expects($this->once())
+            ->method('validateOrFail')
+            ->with($this->identicalTo($model));
+
+        $this->repository
+            ->expects($this->once())
+            ->method('findOrFail')
+            ->with('my-groceries')
+            ->willReturn($list);
+
+        $this->repository
+            ->expects($this->once())
+            ->method('store')
+            ->with($this->callback(function (ShoppingList $actual) use ($list): bool  {
+                $this->assertSame($list, $actual);
+                $this->assertTrue($list->isArchived(), 'it is archived');
+                return true;
+            }));
 
         $this->command->execute($model);
     }

@@ -49,8 +49,8 @@ class TickOffShoppingItemCommandTest extends TestCase
 
     public function testItTicksOffItemAndDoesNotAutoArchiveList(): void
     {
-        // Given a shopping list that has only one item that is not complete
-        $item1 = new ShoppingItem(1, 'Bananas', true);
+        // Given a shopping list that has more than one item that is not complete
+        $item1 = new ShoppingItem(1, 'Bananas', false);
         $item2 = new ShoppingItem(2, 'Apples', true);
         $item3 = new ShoppingItem(3, 'Pears', false);
 

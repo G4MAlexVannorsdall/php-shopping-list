@@ -4,7 +4,11 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem;
 
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\Validation\TickOffShoppingItemValidator;
+use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemSelector;
+use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
+use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class TickOffShoppingItemCommand implements TickOffShoppingItemCommandInterface
@@ -47,6 +51,18 @@ class TickOffShoppingItemCommand implements TickOffShoppingItemCommandInterface
         );
 
         $item->markAsCompleted();
+
+        $itemsNotComplete = [];
+
+        foreach ($list->getItems() as $item) {
+            if ($item->isCompleted() === false) {
+                $itemsNotComplete[] = $item;
+            }
+        }
+
+        if (count($itemsNotComplete) === 0) {
+            $list->setArchived(true);
+        }
 
         $this->repository->store($list);
     }

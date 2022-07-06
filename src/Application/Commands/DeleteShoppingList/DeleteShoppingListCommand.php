@@ -2,21 +2,22 @@
 
 namespace Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList;
 
-use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
+use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class DeleteShoppingListCommand implements DeleteShoppingListCommandInterface
 {
     /**
-     * @var JsonFileHandler
+     * @var ShoppingListRepositoryInterface
      */
-    private JsonFileHandler $fileHandler;
+    private ShoppingListRepositoryInterface $repository;
 
     /**
-     * @param JsonFileHandler $fileHandler
+     * @param ShoppingListRepositoryInterface $repository
      */
-    public function __construct(JsonFileHandler $fileHandler)
+    public function __construct(ShoppingListRepositoryInterface $repository)
     {
-        $this->fileHandler = $fileHandler;
+        $this->repository = $repository;
     }
 
     /**
@@ -24,11 +25,11 @@ class DeleteShoppingListCommand implements DeleteShoppingListCommandInterface
      */
     public function execute(DeleteShoppingListModel $model): void
     {
-        $list = $this->fileHandler->exists(
+        $list = $this->repository->exists(
             $model->getSlug(),
         );
+        $slug = $list->unlink(); // Work in progress
 
-
-      // Here I will put a line of code that deletes the list.
+        $list->unlink();
     }
 }

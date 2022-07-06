@@ -39,4 +39,10 @@ interface ShoppingListRepositoryInterface
      * @return void
      */
     public function store(ShoppingList $list): void;
+
+    /**
+     * @param ShoppingList $slug
+     * @return void
+     */
+    public function unlink(Shoppinglist $slug): void;
 }

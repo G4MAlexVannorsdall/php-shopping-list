@@ -90,4 +90,14 @@ class JsonShoppingListRepository implements ShoppingListRepositoryInterface
 
         return $slug . '.json';
     }
+
+    public function unlink(ShoppingList $slug): void
+    {
+        $filename = $this->storeAs($slug);
+
+        if ($this->files->exists($filename)) {
+            $this->unlink($slug);
+        }
+    }
+
 }

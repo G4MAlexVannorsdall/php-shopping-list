@@ -6,7 +6,7 @@ namespace Lindyhopchris\ShoppingList\Domain\ValueObjects;
 use JsonSerializable;
 use UnexpectedValueException;
 
-class Slug implements JsonSerializable
+class Slug extends \Lindyhopchris\ShoppingList\Domain\ShoppingList implements JsonSerializable
 {
     /** @var string */
     private const REGEX = '/^[a-z][a-z\-]{2,}[a-z]$/';

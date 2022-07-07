@@ -41,6 +41,8 @@ interface ShoppingListRepositoryInterface
     public function store(ShoppingList $list): void;
 
     /**
+     * Retrieve a shopping list by its slug and delete it.
+     *
      * @param ShoppingList $slug
      * @return void
      */

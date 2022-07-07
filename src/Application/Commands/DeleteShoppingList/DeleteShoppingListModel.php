@@ -8,24 +8,23 @@ class DeleteShoppingListModel
     /**
      * @var string
      */
-    private string $slug;
+    private string $list;
 
     /**
      * DeleteShoppingListModel constructor.
      *
-     *
-     * @param string $slug
+     * @param string $list
      */
-    public function __construct(string $slug)
+    public function __construct(string $list)
     {
-        $this->slug = $slug;
+        $this->list = $list;
     }
 
     /**
      * @return string
      */
-    public function getSlug(): string
+    public function getList(): string
     {
-        return $this->slug;
+        return $this->list;
     }
 }

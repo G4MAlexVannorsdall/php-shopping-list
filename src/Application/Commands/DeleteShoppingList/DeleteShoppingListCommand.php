@@ -2,7 +2,6 @@
 
 namespace Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList;
 
-use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class DeleteShoppingListCommand implements DeleteShoppingListCommandInterface

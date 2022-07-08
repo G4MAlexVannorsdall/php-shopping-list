@@ -110,6 +110,17 @@ class JsonFileHandler
     }
 
     /**
+     * Remove the file from storage.
+     *
+     * @param string $filename
+     * @return void
+     */
+    public function unlink(string $filename): void
+    {
+        // @TODO
+    }
+
+    /**
      * Get the full path to a filename.
      *
      * @param string $filename

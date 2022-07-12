@@ -63,4 +63,15 @@ class JsonFileHanderTest extends TestCase
 
         $this->assertJsonStringEqualsJsonString($expected, $actual);
     }
+
+    public function testUnlink(): void
+    {
+        // Arrange: Given a list exists
+        $file = $this->handler->exists('supplies.json');
+        // Act: Delete the list
+        $this->handler->unlink('supplies.json');
+        // Assert: The list has been deleted
+        $this->assertTrue($file);
+
+    }
 }

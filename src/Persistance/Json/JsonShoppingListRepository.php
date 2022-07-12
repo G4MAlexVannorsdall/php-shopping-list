@@ -100,9 +100,7 @@ class JsonShoppingListRepository implements ShoppingListRepositoryInterface
     {
         $filename = $this->storeAs($slug);
 
-        if ($this->files->exists($filename)) {
-            $this->files->unlink($filename);
-        }
+        $this->files->unlink($filename);
     }
 
 }

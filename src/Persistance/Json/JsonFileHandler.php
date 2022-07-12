@@ -117,10 +117,10 @@ class JsonFileHandler
      */
     public function unlink(string $filename): void
     {
-        // Given the path to the file using the slug
-        $slug = $this->pathTo($filename);
+        // Given the path to the file
+        $path = $this->pathTo($filename);
         // If the list of that filename exists then
-        if ($this->exists($filename) && $filename === $slug) {
+        if ($this->exists($filename)) {
             // Delete the list
             unlink($filename);
         } else {

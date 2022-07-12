@@ -120,7 +120,7 @@ class JsonFileHandler
         // Given the path to the file
         $path = $this->pathTo($filename);
         // If the list of that filename exists then
-        if ($this->exists($filename)) {
+        if ($this->exists($path)) {
             // Delete the list
             unlink($filename);
         } else {

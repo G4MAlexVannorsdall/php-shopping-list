@@ -120,9 +120,9 @@ class JsonFileHandler
         // Given the path to the file
         $path = $this->pathTo($filename);
         // If the list of that filename exists then
-        if ($this->exists($path)) {
+        if ($this->exists($filename)) {
             // Delete the list
-            unlink($filename);
+            unlink($path);
         } else {
             throw new InvalidArgumentException('Expecting a valid list name to delete the list.');
         }

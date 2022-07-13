@@ -159,12 +159,11 @@ class JsonShoppingListRepositoryTest extends TestCase
     public function testDelete(): void
     {
         // Arrange: Given a shopping list
-        $list = new ShoppingList(new Slug('supplies'), 'Supplies');
         // Act: We expect the list to be called on once, using the delete method with the list
         $this->files
             ->expects($this->once())
-            ->method('delete')
-            ->with('supplies.json', $this->equalTo(new JsonShoppingList($list)));
+            ->method('unlink')
+            ->with('supplies.json');
         // Assert: That the list has been deleted
         $this->repository->delete('supplies');
     }

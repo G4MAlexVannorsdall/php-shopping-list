@@ -49,3 +49,18 @@ Or to tick off item number 2:
 ```bash
 php scripts/shopping.php complete-item my-groceries 2
 ```
+
+### Mark a Shopping list as archived
+
+To mark a shopping list as archived, provide the list slug.
+```bash
+php scripts/shopping.php archive-list my-groceries
+```
+If all items on the list are ticked off, the list will automatically be marked as archived.
+
+### Mark a Shopping list as deleted
+
+To mark a shopping list as deleted, provide the list slug.
+```bash
+php scripts/shopping.php delete-list my-groceries
+```

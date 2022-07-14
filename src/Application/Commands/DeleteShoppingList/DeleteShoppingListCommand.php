@@ -24,6 +24,10 @@ class DeleteShoppingListCommand implements DeleteShoppingListCommandInterface
      */
     public function execute(DeleteShoppingListModel $model): void
     {
-        $this->repository->delete($model->getList());
+        $list = $this->repository->findOrFail(
+            $model->getList(),
+        );
+
+        $this->repository->delete($list->getSlug());
     }
 }

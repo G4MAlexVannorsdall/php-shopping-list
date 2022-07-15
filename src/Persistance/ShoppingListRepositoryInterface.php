@@ -45,6 +45,7 @@ interface ShoppingListRepositoryInterface
      * Find a shopping list by its slug and delete it.
      *
      * @param string $slug
+     * @throws ShoppingListNotFoundException
      * @return void
      */
     public function delete(string $slug): void;

@@ -36,12 +36,6 @@ class DeleteShoppingListCommandTest extends TestCase
     public function test(): void
     {
         $model = new DeleteShoppingListModel('my-groceries');
-        $mockList = $this->createMock(ShoppingList::class);
-
-        $this->repository
-            ->expects($this->once())
-            ->method('findOrFail')
-            ->willReturn($mockList);
 
         $this->repository
             ->expects($this->once())

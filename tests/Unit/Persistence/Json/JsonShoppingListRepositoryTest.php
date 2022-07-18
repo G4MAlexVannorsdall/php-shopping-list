@@ -162,7 +162,7 @@ class JsonShoppingListRepositoryTest extends TestCase
         // Act: We expect the list to be called on once, using the delete method with the list
         $this->files
             ->expects($this->once())
-            ->method('unlink')
+            ->method('exists')
             ->with('supplies.json');
         // Assert: That the list has been deleted
         $this->repository->delete('supplies');

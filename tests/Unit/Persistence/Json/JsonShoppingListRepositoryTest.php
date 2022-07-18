@@ -156,15 +156,43 @@ class JsonShoppingListRepositoryTest extends TestCase
         $this->repository->store($list);
     }
 
-    public function testDelete(): void
+    public function testDeleteAListThatDoesExist(): void
     {
         // Arrange: Given a shopping list
         // Act: We expect the list to be called on once, using the delete method with the list
         $this->files
             ->expects($this->once())
             ->method('exists')
+            ->with('supplies.json')
+            ->willReturn(true);
+
+        $this->files
+            ->expects($this->once())
+            ->method('unlink')
             ->with('supplies.json');
+
         // Assert: That the list has been deleted
+        $this->repository->delete('supplies');
+    }
+
+    public function testDeleteAListThatDoesNotExist(): void
+    {
+        // Arrange: Given a shopping list does not exist
+        // Act: When the list is deleted via the repo
+
+        $this->files
+            ->expects($this->once())
+            ->method('exists')
+            ->with('supplies.json')
+            ->willReturn(false);
+
+        $this->files
+            ->expects($this->never())
+            ->method('unlink');
+
+        // Assert: Then an exception is thrown saying the list does not exist
+        $this->expectException(ShoppingListNotFoundException::class);
+
         $this->repository->delete('supplies');
     }
 }

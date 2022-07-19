@@ -21,14 +21,21 @@ class ShoppingItem
     private bool $completed;
 
     /**
+     * @var bool
+     */
+    private bool $deleted;
+
+    /**
      * @param int $id
      * @param string $name
+     * @param bool $deleted
      * @param bool $completed
      */
-    public function __construct(int $id, string $name, bool $completed = false)
+    public function __construct(int $id, string $name, bool $deleted, bool $completed = false)
     {
         $this->id = $id;
         $this->name = $name;
+        $this->deleted = $deleted;
         $this->completed = $completed;
     }
 
@@ -80,5 +87,16 @@ class ShoppingItem
     public function markAsCompleted(): void
     {
         $this->completed = true;
+    }
+
+    /**
+     * Delete an item.
+     *
+     * @return void
+     */
+    public function markAsDeleted(): void
+    {
+        $this->deleted = true;
+
     }
 }

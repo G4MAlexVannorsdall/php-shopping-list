@@ -33,6 +33,6 @@ class DeleteShoppingItemCommand
             new ShoppingItemSelector($model->getItem())
         );
 
-        $item->markAsDeleted();
+        $item->remove(); // Will add a remove method to ShoppingList
     }
 }

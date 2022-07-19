@@ -110,6 +110,25 @@ class JsonFileHandler
     }
 
     /**
+     * Remove the file from storage.
+     *
+     * @param string $filename
+     * @return void
+     */
+    public function unlink(string $filename): void
+    {
+        // Given the path to the file
+        $path = $this->pathTo($filename);
+        // If the list of that filename exists then
+        if ($this->exists($filename)) {
+            // Delete the list
+            unlink($path);
+        } else {
+            throw new InvalidArgumentException('Expecting a valid list name to delete the list.');
+        }
+    }
+
+    /**
      * Get the full path to a filename.
      *
      * @param string $filename

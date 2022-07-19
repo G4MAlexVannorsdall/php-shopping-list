@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Persistance;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 
 interface ShoppingListRepositoryInterface
 {
@@ -39,4 +40,13 @@ interface ShoppingListRepositoryInterface
      * @return void
      */
     public function store(ShoppingList $list): void;
+
+    /**
+     * Find a shopping list by its slug and delete it.
+     *
+     * @param string $slug
+     * @throws ShoppingListNotFoundException
+     * @return void
+     */
+    public function delete(string $slug): void;
 }

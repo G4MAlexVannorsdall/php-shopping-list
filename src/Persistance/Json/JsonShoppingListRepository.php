@@ -4,6 +4,7 @@ declare(strict_types=1);
 namespace Lindyhopchris\ShoppingList\Persistance\Json;
 
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\Slug;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
@@ -89,5 +90,20 @@ class JsonShoppingListRepository implements ShoppingListRepositoryInterface
         }
 
         return $slug . '.json';
+    }
+
+    /**
+     * @param string $slug
+     * @return void
+     */
+    public function delete(string $slug): void
+    {
+        $filename = $this->storeAs($slug);
+
+        if (!$this->files->exists($filename)) {
+            throw new ShoppingListNotFoundException();
+        } else {
+            $this->files->unlink($filename);
+        }
     }
 }

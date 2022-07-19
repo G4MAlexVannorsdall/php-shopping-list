@@ -18,6 +18,8 @@ use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateSho
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateShoppingListFactory;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListValidator;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\Rules as CreateShoppingListRules;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList\DeleteShoppingListCommand;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList\DeleteShoppingListCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\Validation\Rules as TickOffShoppingItemRules;
@@ -95,6 +97,18 @@ class Container
             new CreateShoppingListFactory(),
             $repository,
         );
+    }
+
+    /**
+     * Get a delete shopping list command instance.
+     *
+     * @return DeleteShoppingListCommandInterface
+     */
+    public function getDeleteShoppingListCommand(): DeleteShoppingListCommandInterface
+    {
+        $repository = $this->getShoppingListRepository();
+
+        return new DeleteShoppingListCommand($repository);
     }
 
     /**

@@ -5,6 +5,7 @@ namespace Tests\Unit\Application\Commands\DeleteShoppingItem;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemModel;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
+use Lindyhopchris\ShoppingList\Domain\ShoppingItemSelector;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
@@ -37,17 +38,13 @@ class DeleteShoppingItemCommand extends TestCase
 
     public function test(): void
     {
-        // Given a shopping list with items on it
-        $item1 = new ShoppingItem(1, 'Bananas', false);
-        $item2 = new ShoppingItem(2, 'Apples', true);
-        $item3 = new ShoppingItem(3, 'Pears', false);
+        // Given a shopping list with an item on it
+        $model = new DeleteShoppingItemModel('my-groceries', 'Pears');
 
-        $model = new DeleteShoppingItemModel('my-groceries', 3);
-
-        $list = $this->createMock(ShoppingList::class);
-
-        $list->method('getItems')->willReturn(new ShoppingItemStack($item1, $item2, $item3));
-
+        //$list = $this->createMock(ShoppingList::class);
+        // Then get item on the list
+        $list->method('getItem')->willReturn($model);
+        // Delete/remove that item on the list
         $list
             ->expects($this->once())
             ->method('remove');

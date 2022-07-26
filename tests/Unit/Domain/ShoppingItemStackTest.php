@@ -53,6 +53,23 @@ class ShoppingItemStackTest extends TestCase
         return $actual;
     }
 
+    public function testRemove(): ShoppingItemStack
+    {
+        $expected = [
+                new ShoppingItem(1, 'Peaches'),
+                new ShoppingItem(2, 'Bananas'),
+                new ShoppingItem(3, 'Apples'),
+            ];
+
+        $stack = new ShoppingItemStack($expected[0], $expected[2], $expected[1]);
+        $actual = $stack->remove($expected[2]);
+
+        $this->assertCount(2, $actual);
+        $this->assertSame([$expected[0], $expected[1]], $actual->all());
+
+        return $actual;
+    }
+
     /**
      * @param ShoppingItemStack $items
      * @return void

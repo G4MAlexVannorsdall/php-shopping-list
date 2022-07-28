@@ -89,7 +89,6 @@ class ShoppingItemStack implements IteratorAggregate, Countable
      */
     public function remove(ShoppingItem $itemToRemove): self
     {
-        // Get the list first, then get the items on the list
         $stack = $this->all();
 
         $items = [];
@@ -99,8 +98,6 @@ class ShoppingItemStack implements IteratorAggregate, Countable
             }
             $items[] = $item;
         }
-        // If the list is not empty, and you find the id of the item to be deleted
-            // Delete the item
         return new ShoppingItemStack(...$items);
     }
 

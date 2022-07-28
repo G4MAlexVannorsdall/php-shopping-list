@@ -53,7 +53,7 @@ class ShoppingItemStackTest extends TestCase
         return $actual;
     }
 
-    public function testRemove(): ShoppingItemStack
+    public function testRemove(): void
     {
         $expected = [
                 new ShoppingItem(1, 'Peaches'),
@@ -67,7 +67,6 @@ class ShoppingItemStackTest extends TestCase
         $this->assertCount(2, $actual);
         $this->assertSame([$expected[0], $expected[1]], $actual->all());
 
-        return $actual;
     }
 
     /**

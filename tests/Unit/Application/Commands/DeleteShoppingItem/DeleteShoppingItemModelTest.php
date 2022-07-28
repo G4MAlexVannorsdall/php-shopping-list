@@ -31,6 +31,5 @@ class DeleteShoppingItemModelTest extends TestCase
         $model = new DeleteShoppingItemModel('my-groceries', $item);
         $this->assertSame('my-groceries', $model->getList());
         $this->assertSame($expectedItem, $model->getItem());
-        $this->assert ($expectedItem, $model->getItem()); //Need to assert that the item is deleted here
     }
 }

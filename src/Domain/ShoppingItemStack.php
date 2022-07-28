@@ -89,10 +89,8 @@ class ShoppingItemStack implements IteratorAggregate, Countable
      */
     public function remove(ShoppingItem $itemToRemove): self
     {
-        $stack = $this->all();
-
         $items = [];
-        foreach ($stack as $item) {
+        foreach ($this as $item) {
             if ($item->getId() === $itemToRemove->getId()) {
                 continue;
             }

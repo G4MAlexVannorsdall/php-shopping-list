@@ -64,3 +64,9 @@ To mark a shopping list as deleted, provide the list slug.
 ```bash
 php scripts/shopping.php delete-list my-groceries
 ```
+### Mark a Shopping item as deleted
+
+To mark a shopping item as deleted, provide the list slug and the item.
+```bash
+php scripts/shopping.php delete-item my-groceries apples
+```

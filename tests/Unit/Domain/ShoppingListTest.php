@@ -65,6 +65,27 @@ class ShoppingListTest extends TestCase
         $this->assertSame([$item1, $item2], $list->getItems()->all());
     }
 
+    public function testRemoveItem(): void
+    {
+        // Given a shopping list with three items
+        $item1 = new ShoppingItem(1, 'Bananas');
+        $item2 = new ShoppingItem(2, 'Apples');
+        $item3 = new ShoppingItem(3, 'Pears');
+
+        $list = new ShoppingList(
+            new Slug('my-groceries'),
+            'My Groceries',
+            false,
+            new ShoppingItemStack($item1, $item2, $item3),
+        );
+
+        // When the second item is removed
+        $list->removeItem($item2);
+
+        // Then the shopping list now only has items 1 and 3 in the list of items.
+        $this->assertSame([$item1, $item3], $list->getItems()->all());
+    }
+
     /**
      * @param ShoppingList $list
      * @depends testConstructWithoutList

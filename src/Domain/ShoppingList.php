@@ -118,5 +118,15 @@ class ShoppingList
     {
         $this->items = $this->items->push($item);
     }
+
+    /**
+     * Remove/delete a shopping item.
+     *
+     * @param ShoppingItem $item
+     */
+    public function removeItem(ShoppingItem $item): void
+    {
+        $this->items = $this->items->remove($item);
+    }
 }
 

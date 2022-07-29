@@ -82,6 +82,24 @@ class ShoppingItemStack implements IteratorAggregate, Countable
     }
 
     /**
+     * Delete/remove a shopping item.
+     *
+     * @param ShoppingItem $itemToRemove
+     * @return $this
+     */
+    public function remove(ShoppingItem $itemToRemove): self
+    {
+        $items = [];
+        foreach ($this as $item) {
+            if ($item->getId() === $itemToRemove->getId()) {
+                continue;
+            }
+            $items[] = $item;
+        }
+        return new ShoppingItemStack(...$items);
+    }
+
+    /**
      * Does an item with the provided id exist in the stack?
      *
      * @param int $id

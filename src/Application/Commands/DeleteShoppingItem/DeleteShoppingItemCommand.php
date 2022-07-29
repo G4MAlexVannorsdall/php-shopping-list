@@ -33,7 +33,7 @@ class DeleteShoppingItemCommand
             new ShoppingItemSelector($model->getItem())
         );
 
-        $list->remove($item);
+        $list->removeItem($item);
 
         $this->repository->store($list);
     }

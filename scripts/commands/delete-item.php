@@ -25,7 +25,7 @@ try {
 }
 
 echo sprintf(
-        "Shopping item '%s' deleted off your '%s' list.",
+        "Your list '%s' deleted '%s' off your list.",
         $model->getList(),
         $model->getItem(),
     ) . PHP_EOL;

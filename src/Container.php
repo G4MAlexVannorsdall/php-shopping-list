@@ -20,6 +20,7 @@ use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validatio
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\Rules as CreateShoppingListRules;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemCommandInterface;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\DeleteShoppingItemValidator;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList\DeleteShoppingListCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList\DeleteShoppingListCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemCommand;
@@ -122,7 +123,9 @@ class Container
     {
         $repository = $this->getShoppingListRepository();
 
-        return new DeleteShoppingItemCommand($repository);
+        $validator = new DeleteShoppingItemValidator();
+
+        return new DeleteShoppingItemCommand($repository, $validator);
     }
 
     /**

@@ -35,6 +35,10 @@ class ShoppingItemAlreadyDeleted implements DeleteShoppingItemRuleInterface
             $model->getList(),
         );
 
+        if ($list === null) {
+            return $result;
+        }
+
         $item = $list->getItems()->select(
             new ShoppingItemSelector($model->getItem(), false),
         );

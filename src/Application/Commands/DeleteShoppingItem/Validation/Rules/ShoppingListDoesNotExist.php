@@ -7,7 +7,7 @@ use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validatio
 use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
-class ShoppingListSlugDoesNotExist implements DeleteShoppingItemRuleInterface
+class ShoppingListDoesNotExist implements DeleteShoppingItemRuleInterface
 {
     /**
      * @var ShoppingListRepositoryInterface

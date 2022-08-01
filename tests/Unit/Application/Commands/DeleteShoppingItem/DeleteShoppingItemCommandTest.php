@@ -5,6 +5,8 @@ namespace Tests\Unit\Application\Commands\DeleteShoppingItem;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemModel;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\DeleteShoppingItemValidator;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
@@ -77,6 +79,24 @@ class DeleteShoppingItemCommandTest extends TestCase
             ->with($this->identicalTo($list));
 
         // Delete/remove that item on the list
+        $this->command->execute($model);
+    }
+
+    public function testItValidatesBeforeDeletingNewItem(): void
+    {
+        $model = new DeleteShoppingItemModel('my-groceries', 'Apples');
+
+        $this->validator
+            ->expects($this->once())
+            ->method('validateOrFail')
+            ->willThrowException(new ValidationException(new ValidationMessageStack()));
+
+        $this->repository
+            ->expects($this->never())
+            ->method($this->anything());
+
+        $this->expectException(ValidationException::class);
+
         $this->command->execute($model);
     }
 }

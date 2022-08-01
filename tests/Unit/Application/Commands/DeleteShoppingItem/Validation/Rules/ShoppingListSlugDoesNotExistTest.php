@@ -3,7 +3,7 @@
 namespace Tests\Unit\Application\Commands\DeleteShoppingItem\Validation\Rules;
 
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemModel;
-use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\Rules\ShoppingListSlugDoesNotExist;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\Rules\ShoppingListDoesNotExist;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 use PHPUnit\Framework\MockObject\MockObject;
 use PHPUnit\Framework\TestCase;
@@ -16,9 +16,9 @@ class ShoppingListSlugDoesNotExistTest extends TestCase
     private MockObject $repository;
 
     /**
-     * @var ShoppingListSlugDoesNotExist
+     * @var ShoppingListDoesNotExist
      */
-    private ShoppingListSlugDoesNotExist $rule;
+    private ShoppingListDoesNotExist $rule;
 
     /**
      * @return void
@@ -26,7 +26,7 @@ class ShoppingListSlugDoesNotExistTest extends TestCase
     protected function setUp(): void
     {
         parent::setUp();
-        $this->rule = new ShoppingListSlugDoesNotExist(
+        $this->rule = new ShoppingListDoesNotExist(
             $this->repository = $this->createMock(ShoppingListRepositoryInterface::class),
         );
     }

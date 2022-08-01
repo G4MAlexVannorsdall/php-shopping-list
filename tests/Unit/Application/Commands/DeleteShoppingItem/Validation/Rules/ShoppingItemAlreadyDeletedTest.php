@@ -4,6 +4,7 @@ namespace Tests\Unit\Application\Commands\DeleteShoppingItem\Validation\Rules;
 
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemModel;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\Rules\ShoppingItemAlreadyDeleted;
+use Lindyhopchris\ShoppingList\Domain\ShoppingItem;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemSelector;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingList;
@@ -64,4 +65,47 @@ class ShoppingItemAlreadyDeletedTest extends TestCase
             $actual->getMessages(),
         );
     }
+
+    public function testListDoesNotExist(): void
+    {
+        $model = new DeleteShoppingitemModel('supplies', 'tape');
+
+        $this->repository
+            ->expects($this->once())
+            ->method('find')
+            ->with('supplies')
+            ->willReturn(null);
+
+        $actual = $this->rule->validate($model);
+
+        $this->assertTrue($actual->hasErrors());
+        $this->assertSame(['Shopping list "supplies" does not exist.'], $actual->getMessages());
+    }
+
+    public function testItPasses(): void
+    {
+        $model = new DeleteShoppingItemModel('my-groceries', 'Apples');
+
+        $this->repository
+            ->expects($this->once())
+            ->method('find')
+            ->with('my-groceries')
+            ->willReturn($list = $this->createMock(ShoppingList::class));
+
+        $list
+            ->expects($this->once())
+            ->method('getItems')
+            ->willReturn($items = $this->createMock(ShoppingItemStack::class));
+
+        $items
+            ->expects($this->once())
+            ->method('select')
+            ->with($this->equalTo(new ShoppingItemSelector('Apples', false)))
+            ->willReturn($this->createMock(ShoppingItem::class));
+
+        $actual = $this->rule->validate($model);
+
+        $this->assertFalse($actual->hasErrors());
+    }
+
 }

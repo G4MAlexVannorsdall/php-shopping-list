@@ -123,6 +123,7 @@ class ShoppingList
      * Remove/delete a shopping item.
      *
      * @param ShoppingItem $item
+     * @return void
      */
     public function removeItem(ShoppingItem $item): void
     {

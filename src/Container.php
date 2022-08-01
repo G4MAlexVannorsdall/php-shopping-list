@@ -19,7 +19,9 @@ use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\CreateSho
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\CreateShoppingListValidator;
 use Lindyhopchris\ShoppingList\Application\Commands\CreateShoppingList\Validation\Rules as CreateShoppingListRules;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemCommand;
-use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\DeleteShoppingItemCommandInterface;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\DeleteShoppingItemValidator;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\Rules\ShoppingItemAlreadyDeleted;
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\Rules\ShoppingListDoesNotExist;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList\DeleteShoppingListCommand;
 use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingList\DeleteShoppingListCommandInterface;
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\TickOffShoppingItemCommand;
@@ -33,6 +35,7 @@ use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListFactory;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListRepository;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
+use PharIo\Manifest\Application;
 
 class Container
 {
@@ -122,7 +125,15 @@ class Container
     {
         $repository = $this->getShoppingListRepository();
 
-        return new DeleteShoppingItemCommand($repository);
+        $validator = new DeleteShoppingItemValidator(
+            new ShoppingItemAlreadyDeleted($repository),
+            new ShoppingListDoesNotExist($repository)
+        );
+
+        return new DeleteShoppingItemCommand(
+            $repository,
+            $validator,
+        );
     }
 
     /**

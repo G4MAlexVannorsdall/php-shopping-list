@@ -2,6 +2,9 @@
 
 namespace Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem;
 
+use Lindyhopchris\ShoppingList\Application\Commands\DeleteShoppingItem\Validation\DeleteShoppingItemValidator;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationException;
+use Lindyhopchris\ShoppingList\Common\Validation\ValidationMessageStack;
 use Lindyhopchris\ShoppingList\Domain\ShoppingItemSelector;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
@@ -13,11 +16,18 @@ class DeleteShoppingItemCommand
     private ShoppingListRepositoryInterface $repository;
 
     /**
-     * @param ShoppingListRepositoryInterface $repository
+     * @var DeleteShoppingItemValidator
      */
-    public function __construct(ShoppingListRepositoryInterface $repository)
+    private DeleteShoppingItemValidator $validator;
+
+    /**
+     * @param ShoppingListRepositoryInterface $repository
+     * @param DeleteShoppingItemValidator $validator
+     */
+    public function __construct(ShoppingListRepositoryInterface $repository, DeleteShoppingItemValidator $validator)
     {
         $this->repository = $repository;
+        $this->validator = $validator;
     }
 
     /**
@@ -25,6 +35,8 @@ class DeleteShoppingItemCommand
      */
     public function execute(DeleteShoppingItemModel $model): void
     {
+        $this->validator->validateOrFail($model);
+
         $list = $this->repository->findOrFail(
             $model->getList()
         );

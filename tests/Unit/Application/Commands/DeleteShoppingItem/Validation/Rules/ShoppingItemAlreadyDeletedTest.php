@@ -78,8 +78,7 @@ class ShoppingItemAlreadyDeletedTest extends TestCase
 
         $actual = $this->rule->validate($model);
 
-        $this->assertTrue($actual->hasErrors());
-        $this->assertSame(['Shopping list "supplies" does not exist.'], $actual->getMessages());
+        $this->assertFalse($actual->hasErrors());
     }
 
     public function testItPasses(): void

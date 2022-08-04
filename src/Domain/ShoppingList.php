@@ -128,6 +128,14 @@ class ShoppingList
     public function removeItem(ShoppingItem $item): void
     {
         $this->items = $this->items->remove($item);
+
+        $deletedId = $item->getId();
+
+       foreach ($this->getItems() as $item) {
+           if ($item->getId() >= $deletedId) {
+             $item->setId($item->getId() - 1);
+           }
+       }
     }
 }
 

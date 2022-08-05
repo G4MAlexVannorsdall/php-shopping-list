@@ -48,9 +48,9 @@ class ShoppingItem
      * @param int $id
      * @return int
      */
-    public function setId(int $id): int
+    public function setId(int $id): void
     {
-        return $this->id = $id;
+        $this->id = $id;
     }
 
     /**

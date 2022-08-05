@@ -43,6 +43,17 @@ class ShoppingItem
     }
 
     /**
+     * Set the id of the shopping item.
+     *
+     * @param int $id
+     * @return int
+     */
+    public function setId(int $id): void
+    {
+        $this->id = $id;
+    }
+
+    /**
      * Get the name of the shopping item.
      *
      * @return string

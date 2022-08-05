@@ -70,20 +70,27 @@ class ShoppingListTest extends TestCase
         // Given a shopping list with three items
         $item1 = new ShoppingItem(1, 'Bananas');
         $item2 = new ShoppingItem(2, 'Apples');
-        $item3 = new ShoppingItem(3, 'Pears');
+        $item3 = new ShoppingItem(3, 'Pears', true);
+        $item4 = new ShoppingItem(4, 'Apricots');
 
         $list = new ShoppingList(
             new Slug('my-groceries'),
             'My Groceries',
             false,
-            new ShoppingItemStack($item1, $item2, $item3),
+            new ShoppingItemStack($item1, $item2, $item3, $item4),
         );
+
+        $expected = [
+            new ShoppingItem(1, 'Bananas'),
+            new ShoppingItem(2, 'Pears', true),
+            new ShoppingItem(3, 'Apricots'),
+        ];
 
         // When the second item is removed
         $list->removeItem($item2);
 
-        // Then the shopping list now only has items 1 and 3 in the list of items.
-        $this->assertSame([$item1, $item3], $list->getItems()->all());
+        // Then the shopping list now only has items 1, 3 and 4 in the list of items, and they are renumbered.
+        $this->assertEquals($expected, $list->getItems()->all());
     }
 
     /**

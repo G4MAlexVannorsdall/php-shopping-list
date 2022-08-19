@@ -10,11 +10,18 @@ class GetShoppingListNamesRequest
     private string $filterValue;
 
     /**
-     * @param string $filterValue
+     * @var string
      */
-    public function __construct(string $filterValue)
+    private string $slug;
+
+    /**
+     * @param string $filterValue
+     * @param string $slug
+     */
+    public function __construct(string $filterValue, string $slug)
     {
         $this->filterValue = $filterValue;
+        $this->slug = $slug;
     }
 
     /**
@@ -26,4 +33,13 @@ class GetShoppingListNamesRequest
     {
         return $this->filterValue;
     }
+
+    /**
+     * @return string
+     */
+    public function getSlug(): string
+    {
+        return $this->slug;
+    }
+
 }

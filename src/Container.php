@@ -30,6 +30,7 @@ use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\Validati
 use Lindyhopchris\ShoppingList\Application\Commands\TickOffShoppingItem\Validation\TickOffShoppingItemValidator;
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQuery;
 use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListDetail\GetShoppingListDetailQueryInterface;
+use Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListNames\GetShoppingListNamesQuery;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonFileHandler;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingItemFactory;
 use Lindyhopchris\ShoppingList\Persistance\Json\JsonShoppingListFactory;
@@ -144,6 +145,18 @@ class Container
     public function getShoppingListDetailQuery(): GetShoppingListDetailQueryInterface
     {
         return new GetShoppingListDetailQuery(
+            $this->getShoppingListRepository(),
+        );
+    }
+
+    /**
+     * Get a shopping list names query instance.
+     *
+     * @return GetShoppingListNamesQuery
+     */
+    public function getShoppingListNamesQuery(): GetShoppingListNamesQuery
+    {
+        return new GetShoppingListNamesQuery(
             $this->getShoppingListRepository(),
         );
     }

@@ -3,6 +3,7 @@ declare(strict_types=1);
 
 namespace Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListNames;
 
+use Lindyhopchris\ShoppingList\Domain\ValueObjects\ShoppingListFilterEnum;
 use Lindyhopchris\ShoppingList\Persistance\ShoppingListRepositoryInterface;
 
 class GetShoppingListNamesQuery implements GetShoppingListNamesQueryInterface
@@ -23,18 +24,21 @@ class GetShoppingListNamesQuery implements GetShoppingListNamesQueryInterface
     /**
      * @inheritDoc
      */
-    public function execute(GetShoppingListNamesRequest $request): ShoppingListNamesModel
+    public function execute(GetShoppingListNamesRequest $request): array
     {
-        //$archived = $request->getFilterValue();
+        $list = $this->repository->findOrFail($request->getSlug());
+        $newList = [];
 
-        $storageDirectory = 'storage';
-        $lists = array_diff(scandir($storageDirectory), array('.', '..'));
+        $enum = new ShoppingListFilterEnum($request->getFilterValue());
 
-
-
-
-        print_r($lists);
-
-        return;
+        while ($list->getName()) {
+            if ($enum->onlyNotArchived() && $list->isArchived() === false) {
+                $newList[] = new ShoppingListNamesModel(
+                    $list->getSlug()->toString(),
+                    $list->getName()
+                );
+            }
+        }
+        return $newList;
     }
 }

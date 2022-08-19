@@ -8,11 +8,10 @@ use Lindyhopchris\ShoppingList\Persistance\ShoppingListNotFoundException;
 interface GetShoppingListNamesQueryInterface
 {
     /**
-     * Get the shopping list names.
+     * Get the shopping lists names.
      *
      * @param GetShoppingListNamesRequest $request
-     * @return ShoppingListNamesModel
      * @throws ShoppingListNotFoundException
      */
-    public function execute(GetShoppingListNamesRequest $request): ShoppingListNamesModel;
+    public function execute(GetShoppingListNamesRequest $request): array;
 }

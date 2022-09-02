@@ -26,19 +26,31 @@ class GetShoppingListNamesQuery implements GetShoppingListNamesQueryInterface
      */
     public function execute(GetShoppingListNamesRequest $request): array
     {
-        $list = $this->repository->findOrFail($request->getSlug());
-        $newList = [];
+        $pathToStorage = '../../storage';
+        $shoppingLists = scandir($pathToStorage);
+
+        $viewLists = [];
+
+        foreach ($shoppingLists as $shoppingList) {
+            if (str_ends_with($shoppingList, '.json')) {
+                $editedList = substr($shoppingList, -5);
+                $viewLists[] = $editedList;
+            }
+
+            return $viewLists;
+        }
 
         $enum = new ShoppingListFilterEnum($request->getFilterValue());
 
-        while ($list->getName()) {
+        foreach ($viewLists as $list) {
             if ($enum->onlyNotArchived() && $list->isArchived() === false) {
-                $newList[] = new ShoppingListNamesModel(
+                $listNames[] = new ShoppingListNamesModel(
                     $list->getSlug()->toString(),
                     $list->getName()
                 );
             }
         }
-        return $newList;
+        return $listNames;
     }
 }
+

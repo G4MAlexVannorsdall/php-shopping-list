@@ -5,41 +5,25 @@ namespace Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListNames;
 class GetShoppingListNamesRequest
 {
     /**
-     * @var string
+     * @var string|null
      */
-    private string $filterValue;
+    private ?string $filterValue;
 
     /**
-     * @var string
+     * @param string|null $filterValue
      */
-    private string $slug;
-
-    /**
-     * @param string $filterValue
-     * @param string $slug
-     */
-    public function __construct(string $filterValue, string $slug)
+    public function __construct(string $filterValue = null)
     {
         $this->filterValue = $filterValue;
-        $this->slug = $slug;
     }
 
     /**
      * Returns whether the list is archived.
      *
-     * @return string
+     * @return string|null
      */
-    public function getFilterValue(): string
+    public function getFilterValue(): ?string
     {
         return $this->filterValue;
     }
-
-    /**
-     * @return string
-     */
-    public function getSlug(): string
-    {
-        return $this->slug;
-    }
-
 }

@@ -2,7 +2,7 @@
 
 namespace Lindyhopchris\ShoppingList\Application\Queries\GetShoppingListNames;
 
-class ShoppingListNamesModel
+class ShoppingListNameModel
 {
     /**
      * @var string
@@ -15,7 +15,7 @@ class ShoppingListNamesModel
     private string $name;
 
     /**
-     * ShoppingListNamesModel constructor.
+     * ShoppingListNameModel constructor.
      *
      * @param string $slug
      * @param string $name

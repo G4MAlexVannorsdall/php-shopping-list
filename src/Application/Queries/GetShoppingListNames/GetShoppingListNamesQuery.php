@@ -26,26 +26,30 @@ class GetShoppingListNamesQuery implements GetShoppingListNamesQueryInterface
      */
     public function execute(GetShoppingListNamesRequest $request): array
     {
-        $pathToStorage = '../../storage';
-        $shoppingLists = scandir($pathToStorage);
+        $pathToStorage = __DIR__ . '/../../../../storage';
+        $fileNames = scandir($pathToStorage);
 
-        $listNames = [];
+        $listSlugs = [];
 
-        foreach ($shoppingLists as $shoppingList) {
-            if (str_ends_with($shoppingList, '.json')) {
-                $editedList = substr($shoppingList, -5);
-                $listNames[] = $editedList;
+        foreach ($fileNames as $fileName) {
+            if (str_ends_with($fileName, '.json')) {
+//                $editedList = substr($shoppingList,0, strlen($shoppingList) - 5);
+                $parts = explode('.', $fileName);
+                $listSlugs[] = $parts[0];
             }
         }
 
-        $enum = new ShoppingListFilterEnum($request->getFilterValue());
+        //$getListNames = new ShoppingListRepositoryInterface()
 
-        foreach ($listNames as $list) {
-            if ($enum->onlyNotArchived() && $list->isArchived() === false) {
-                $listNames[] = $list;
-            }
-        }
-        return $listNames;
+
+//        $enum = new ShoppingListFilterEnum($request->getFilterValue());
+//
+//        foreach ($listNames as $list) {
+//            if ($enum->onlyNotArchived() && $list->isArchived() === false) {
+//                $listNames[] = $list;
+//            }
+//        }
+        return $listSlugs;
     }
 }
 

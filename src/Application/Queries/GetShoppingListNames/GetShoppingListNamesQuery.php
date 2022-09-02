@@ -29,25 +29,22 @@ class GetShoppingListNamesQuery implements GetShoppingListNamesQueryInterface
         $pathToStorage = '../../storage';
         $shoppingLists = scandir($pathToStorage);
 
-        $viewLists = [];
+        $listNames = [];
 
         foreach ($shoppingLists as $shoppingList) {
             if (str_ends_with($shoppingList, '.json')) {
                 $editedList = substr($shoppingList, -5);
-                $viewLists[] = $editedList;
+                $listNames[] = $editedList;
             }
 
-            return $viewLists;
+            return $listNames;
         }
 
         $enum = new ShoppingListFilterEnum($request->getFilterValue());
 
-        foreach ($viewLists as $list) {
+        foreach ($listNames as $list) {
             if ($enum->onlyNotArchived() && $list->isArchived() === false) {
-                $listNames[] = new ShoppingListNamesModel(
-                    $list->getSlug()->toString(),
-                    $list->getName()
-                );
+                $listNames[] = $list;
             }
         }
         return $listNames;

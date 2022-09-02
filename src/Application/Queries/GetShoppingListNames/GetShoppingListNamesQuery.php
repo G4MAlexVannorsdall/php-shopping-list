@@ -36,8 +36,6 @@ class GetShoppingListNamesQuery implements GetShoppingListNamesQueryInterface
                 $editedList = substr($shoppingList, -5);
                 $listNames[] = $editedList;
             }
-
-            return $listNames;
         }
 
         $enum = new ShoppingListFilterEnum($request->getFilterValue());

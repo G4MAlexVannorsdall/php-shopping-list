@@ -70,3 +70,8 @@ To mark a shopping item as deleted, provide the list slug and the item.
 ```bash
 php scripts/shopping.php delete-item my-groceries apples
 ```
+### View all shopping lists
+To view all shopping lists in storage use this command.
+```bash
+php scripts/shopping.php view-lists
+```
